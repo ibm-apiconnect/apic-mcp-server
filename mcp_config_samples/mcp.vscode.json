@@ -1,0 +1,69 @@
+{
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "api-key",
+            "description": "APIC API Key",
+            "password": true
+        },
+        {
+            "type": "promptString",
+            "id": "pOrg",
+            "description": "Provider Organization name",
+            "password": false
+        },
+        {
+            "type": "promptString",
+            "id": "cID",
+            "description": "Client ID",
+            "password": false
+        },
+        {
+            "type": "promptString",
+            "id": "cSecret",
+            "description": "Client Secret",
+            "password": true
+        },
+        {
+            "type": "promptString",
+            "id": "tarPath",
+            "description": "Path to NPM package tar file",
+            "password": false
+        },
+        {
+            "type": "promptString",
+            "id": "platformUrl",
+            "description": "APIC Platform URL",
+            "password": false
+        },
+        {
+            "type": "promptString",
+            "id": "managementUrl",
+            "description": "APIC Management URL",
+            "password": false
+        },
+        {
+            "type": "promptString",
+            "id": "validateCertificates",
+            "description": "Whether to validate certificates for API Connect instance, set to '0' to disable validation or '1' to enable validation. Should be set to '0' if using self-signed certificates.",
+            "required": false,
+            "password": false,
+            "default": "1"
+        }
+    ],
+    "servers": {
+        "apic-mcp-server": {
+            "command": "npx",
+            "args": ["-y", "-p", "${input:tarPath}", "apic-mcp-server"],
+            "env": {
+                "PROVIDER_ORG": "${input:pOrg}",
+                "API_KEY": "${input:api-key}",
+                "client_id": "${input:cID}",
+                "client_secret": "${input:cSecret}",
+                "APIC_PLATFORM_URL": "${input:platformUrl}",
+                "APIC_MANAGEMENT_URL": "${input:managementUrl}",
+                "NODE_TLS_REJECT_UNAUTHORIZED": "${input:validateCertificates}"
+            }
+        }
+    }
+}
