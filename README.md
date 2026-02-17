@@ -6,12 +6,6 @@
 
 This MCP server can be integrated with various MCP clients such as **Claude Desktop**, **VS Code**, and **Langflow** etc.
 
-## 📰 Blogs
-
-[IBM API Connect MCP Server](https://community.ibm.com/community/user/blogs/goutham-shivanna/2026/01/26/ibm-api-connect-mcp-server)
-
-[Exploring IBM API Connect v12.1.0 API Analytics with the API Agent's Analytics MCP Tool](https://community.ibm.com/community/user/blogs/michael-osullivan/2025/12/23/apic-api-analytics-with-the-api-agent)
-
 ### 💻 Suggested MCP Clients
 
 [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=vsc&logoColor=white)](https://code.visualstudio.com/) [![Claude Desktop](https://img.shields.io/badge/Claude_Desktop-D97757?logo=claude&logoColor=fff)](https://claude.ai/download) [![Langflow](svg/langflow.badge.svg)](https://www.langflow.org/)
@@ -25,7 +19,7 @@ This MCP server can be integrated with various MCP clients such as **Claude Desk
   - _`Client Secret`_ configured on your API Connect instance
   - _`APIC Platform Endpoint`_ of your instance
   - _`APIC Management Endpoint`_ of your instance
-- APIC MCP server's _`npm package`_ tar file **`OR`** the _`.mcpb`_ installer
+- _`npm package`_ tar file **`OR`** the _`.mcpb`_ installer of the API Connect service (e.g., [Analytics](./analytics))
 - One of the [`suggested MCP Client`](#-suggested-mcp-clients) application
 
 ---
@@ -51,9 +45,9 @@ For example:
 
 ```json
     "servers": {
-        "apic-mcp-server": {
+        "apic-analytics-mcp-server": {
             "command": "npx",
-            "args": ["-y", "-p", "${input:tarPath}", "apic-mcp-server"],
+            "args": ["-y", "-p", "${input:tarPath}", "apic-analytics-mcp-server"],
             "env": {
                 ...
                 ...
@@ -69,7 +63,7 @@ For example:
 
 ### [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/-0078d7.svg?logo=vsc&logoColor=white)`Visual Studio Code`](https://code.visualstudio.com/) `and` [![Langflow](svg/langflow.icon.svg)`Langflow`](https://www.langflow.org/)
 
-1. **Choose the relevant template file** for your client ([`mcp.vscode.json`](./mcp_config_samples/mcp.vscode.json) or [`mcp.langflow.json`](./mcp_config_samples/mcp.langflow.json)).
+1. **Choose the relevant template file** for your client in the specific service folder ([`mcp.vscode.json`](./analytics_build/mcp.vscode.json) or [`mcp.langflow.json`](./analytics_build/mcp.langflow.json)).
 2. **Fill in your APIC configuration details** in the template.
 3. **Copy the configured mcp json**
 4. **Follow steps provided by the respective client to continue with the setup.**
@@ -86,10 +80,10 @@ Claude Desktop now supports easy installation through Anthropic's new **Extensio
 
 #### Step 1: Locate the Extension File
 
-Find the `.mcpb` file you have obtained from this repository:
+Find the `.mcpb` file you have obtained from the specific service folder of this repository, for example:
 
 ```txt
-apic-mcp-server-x.x.x.mcpb
+analytics/apic-analytics-mcp-server-x.x.x.mcpb
 ```
 
 where `x.x.x` is the version of the APIC MCP server
