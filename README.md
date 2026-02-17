@@ -69,7 +69,7 @@ For example:
 
 ### [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/-0078d7.svg?logo=vsc&logoColor=white)`Visual Studio Code`](https://code.visualstudio.com/) `and` [![Langflow](svg/langflow.icon.svg)`Langflow`](https://www.langflow.org/)
 
-1. **Choose the relevant template file** for your client in the specific service folder ([`mcp.vscode.json`](./analytics_build/mcp.vscode.json) or [`mcp.langflow.json`](./analytics_build/mcp.langflow.json)).
+1. **Choose the relevant template file** for your client in the specific service folder ([`mcp.vscode.json`](./analytics/mcp.vscode.json) or [`mcp.langflow.json`](./analytics/mcp.langflow.json)).
 2. **Fill in your APIC configuration details** in the template.
 3. **Copy the configured mcp json**
 4. **Follow steps provided by the respective client to continue with the setup.**
