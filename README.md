@@ -6,6 +6,12 @@
 
 This MCP server can be integrated with various MCP clients such as **Claude Desktop**, **VS Code**, and **Langflow** etc.
 
+## 📰 Blogs
+
+[IBM API Connect MCP Server](https://community.ibm.com/community/user/blogs/goutham-shivanna/2026/01/26/ibm-api-connect-mcp-server)
+
+[Exploring IBM API Connect v12.1.0 API Analytics with the API Agent's Analytics MCP Tool](https://community.ibm.com/community/user/blogs/michael-osullivan/2025/12/23/apic-api-analytics-with-the-api-agent)
+
 ### 💻 Suggested MCP Clients
 
 [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=vsc&logoColor=white)](https://code.visualstudio.com/) [![Claude Desktop](https://img.shields.io/badge/Claude_Desktop-D97757?logo=claude&logoColor=fff)](https://claude.ai/download) [![Langflow](svg/langflow.badge.svg)](https://www.langflow.org/)
