@@ -25,7 +25,7 @@ This MCP server can be integrated with various MCP clients such as **Claude Desk
   - _`Client Secret`_ configured on your API Connect instance
   - _`APIC Platform Endpoint`_ of your instance
   - _`APIC Management Endpoint`_ of your instance
-- APIC MCP server's _`npm package`_ tar file **`OR`** the _`.mcpb`_ installer
+- _`npm package`_ tar file **`OR`** the _`.mcpb`_ installer of the API Connect service (e.g., [Analytics](./analytics))
 - One of the [`suggested MCP Client`](#-suggested-mcp-clients) application
 
 ---
@@ -51,9 +51,9 @@ For example:
 
 ```json
     "servers": {
-        "apic-mcp-server": {
+        "apic-analytics-mcp-server": {
             "command": "npx",
-            "args": ["-y", "-p", "${input:tarPath}", "apic-mcp-server"],
+            "args": ["-y", "-p", "${input:tarPath}", "apic-analytics-mcp-server"],
             "env": {
                 ...
                 ...
@@ -69,7 +69,7 @@ For example:
 
 ### [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/-0078d7.svg?logo=vsc&logoColor=white)`Visual Studio Code`](https://code.visualstudio.com/) `and` [![Langflow](svg/langflow.icon.svg)`Langflow`](https://www.langflow.org/)
 
-1. **Choose the relevant template file** for your client ([`mcp.vscode.json`](./mcp_config_samples/mcp.vscode.json) or [`mcp.langflow.json`](./mcp_config_samples/mcp.langflow.json)).
+1. **Choose the relevant template file** for your client in the specific service folder ([`mcp.vscode.json`](./analytics/mcp.vscode.json) or [`mcp.langflow.json`](./analytics/mcp.langflow.json)).
 2. **Fill in your APIC configuration details** in the template.
 3. **Copy the configured mcp json**
 4. **Follow steps provided by the respective client to continue with the setup.**
@@ -86,10 +86,10 @@ Claude Desktop now supports easy installation through Anthropic's new **Extensio
 
 #### Step 1: Locate the Extension File
 
-Find the `.mcpb` file you have obtained from this repository:
+Find the `.mcpb` file you have obtained from the specific service folder of this repository, for example:
 
 ```txt
-apic-mcp-server-x.x.x.mcpb
+analytics/apic-analytics-mcp-server-x.x.x.mcpb
 ```
 
 where `x.x.x` is the version of the APIC MCP server
