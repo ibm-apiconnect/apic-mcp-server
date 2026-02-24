@@ -118,5 +118,6 @@ Currently available tools
 |Service|Link|
 |---|---|
 |Analytics|[Analytics tools doc](https://www.ibm.com/docs/en/api-connect/software/12.1.0?topic=tools-analytics)|
+|Management||
 
 More to come soon...
