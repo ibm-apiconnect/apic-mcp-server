@@ -4,7 +4,7 @@
 
 ## ![mcp](svg/mcp.icon.badge.svg) Using `apic-mcp-server` with MCP Clients
 
-This MCP server can be integrated with various MCP clients such as **Claude Desktop**, **VS Code**, and **Langflow** etc.
+This MCP server can be integrated with various MCP clients such as **Claude Desktop**, **VS Code**, and **IBM BOB** etc.
 
 ## 📰 Blogs
 
@@ -14,7 +14,7 @@ This MCP server can be integrated with various MCP clients such as **Claude Desk
 
 ### 💻 Suggested MCP Clients
 
-[![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=vsc&logoColor=white)](https://code.visualstudio.com/) [![Claude Desktop](https://img.shields.io/badge/Claude_Desktop-D97757?logo=claude&logoColor=fff)](https://claude.ai/download) [![Langflow](svg/langflow.badge.svg)](https://www.langflow.org/)
+[![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=vsc&logoColor=white)](https://code.visualstudio.com/) [![Claude Desktop](https://img.shields.io/badge/Claude_Desktop-D97757?logo=claude&logoColor=fff)](https://claude.ai/download) [![IBM BOB](svg/ibm-bob.badge.svg)](https://www.ibm.com/products/bob)
 
 ### ✅ Prerequisites
 
@@ -67,14 +67,14 @@ For example:
 
 ## 📝 Setup Instructions for suggested MCP Clients
 
-### [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/-0078d7.svg?logo=vsc&logoColor=white)`Visual Studio Code`](https://code.visualstudio.com/) `and` [![Langflow](svg/langflow.icon.svg)`Langflow`](https://www.langflow.org/)
+### [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/-0078d7.svg?logo=vsc&logoColor=white)`Visual Studio Code`](https://code.visualstudio.com/) `and` [![IBM BOB](svg/ibm-bob.icon.svg)`IBM BOB`](https://www.ibm.com/products/bob)
 
-1. **Choose the relevant template file** for your client in the specific service folder ([`mcp.vscode.json`](./analytics/mcp.vscode.json) or [`mcp.langflow.json`](./analytics/mcp.langflow.json)).
+1. **Choose the relevant template file** for your client in the specific service folder ([`mcp.vscode.json`](./analytics/mcp.vscode.json) or [`mcp.bob.json`](./analytics/mcp.bob.json)).
 2. **Fill in your APIC configuration details** in the template.
 3. **Copy the configured mcp json**
 4. **Follow steps provided by the respective client to continue with the setup.**
     - Open [`VS Code MCP server setup`](https://code.visualstudio.com/docs/copilot/customization/mcp-servers#_add-an-mcp-server) and expand the section **`Add an MCP server to your workspace`** for details
-    - Open [`Langflow MCP server setup`](https://docs.langflow.org/mcp-client) link for details
+    - Open [`IBM BOB MCP server setup`](https://www.ibm.com/think/tutorials/mcp-integration-ibm-bob) link for details
 
 ---
 
@@ -118,5 +118,6 @@ Currently available tools
 |Service|Link|
 |---|---|
 |Analytics|[Analytics tools doc](https://www.ibm.com/docs/en/api-connect/software/12.1.0?topic=tools-analytics)|
+|Management|[API Connect Management tools doc](https://www.ibm.com/docs/en/api-connect/software/12.1.0?topic=tools-api-connect-task)|
 
 More to come soon...
