@@ -67,14 +67,146 @@ For example:
 
 ## 📝 Setup Instructions for suggested MCP Clients
 
-### [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/-0078d7.svg?logo=vsc&logoColor=white)`Visual Studio Code`](https://code.visualstudio.com/) `and` [![IBM BOB](svg/ibm-bob.icon.svg)`IBM BOB`](https://www.ibm.com/products/bob)
+### [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/-0078d7.svg?logo=vsc&logoColor=white) `Visual Studio Code`](https://code.visualstudio.com/)
 
-1. **Choose the relevant template file** for your client in the specific service folder ([`mcp.vscode.json`](./analytics/mcp.vscode.json) or [`mcp.bob.json`](./analytics/mcp.bob.json)).
-2. **Fill in your APIC configuration details** in the template.
-3. **Copy the configured mcp json**
-4. **Follow steps provided by the respective client to continue with the setup.**
-    - Open [`VS Code MCP server setup`](https://code.visualstudio.com/docs/copilot/customization/mcp-servers#_add-an-mcp-server) and expand the section **`Add an MCP server to your workspace`** for details
-    - Open [`IBM BOB MCP server setup`](https://www.ibm.com/think/tutorials/mcp-integration-ibm-bob) link for details
+#### Manual Configuration
+
+1. **Choose the template file** [`mcp.vscode.json`](./analytics/mcp.vscode.json) from the specific service folder
+2. **Fill in your APIC configuration details** in the template
+3. **Copy the configured mcp json** to your workspace `.vscode` folder
+4. **Follow the official VS Code setup guide**:
+   - Open [`VS Code MCP server setup`](https://code.visualstudio.com/docs/copilot/customization/mcp-servers#_add-an-mcp-server)
+   - Expand the section **`Add an MCP server to your workspace`** for detailed instructions
+
+---
+
+### [![IBM BOB](svg/ibm-bob.icon.svg) `IBM BOB`](https://www.ibm.com/products/bob)
+
+IBM Bob provides two setup methods: an automated command-based approach (recommended) and manual configuration.
+
+#### Automated Setup (Recommended)
+
+Bob includes a built-in command that automates the entire installation and configuration process:
+
+1. **Copy the command file to your workspace**:
+
+   **Option A: If you have the repository files locally**:
+
+   ```bash
+   # Create the commands directory if it doesn't exist
+   mkdir -p .bob/commands
+
+   # Copy the command file from the repository
+   cp init-apic-mcp.md .bob/commands/
+   ```
+
+   **Option B: If reading online (download directly)**:
+
+   ```bash
+   # Create the commands directory if it doesn't exist
+   mkdir -p .bob/commands
+
+   # Download the command file directly from GitHub
+   curl -o .bob/commands/init-apic-mcp.md https://github.com/ibm-apiconnect/apic-mcp-server/blob/main/init-apic-mcp.md
+   ```
+
+   This makes the `/init-apic-mcp` command available in Bob.
+
+2. **Trigger the setup command** in Bob by typing:
+
+   ```txt
+   /init-apic-mcp
+   ```
+
+   The command will appear in the autocomplete list when you type `/` in Bob's chat.
+
+3. **Bob will automatically**:
+   - ✅ Verify prerequisites (Git, Node.js v18+, npm)
+   - ✅ Create standardized directory structure at `~/apic-mcp/servers/`
+   - ✅ Clone the official APIC MCP server repository
+   - ✅ Discover all available MCP servers in the repository
+   - ✅ Prompt you for required configuration values (API keys, URLs, etc.)
+   - ✅ Generate the `.bob/mcp.json` configuration file with absolute paths
+   - ✅ Validate the complete installation
+
+4. **Provide configuration values** when prompted:
+   - API keys for your APIC instance
+   - Base URLs for APIC services
+   - Other service-specific settings
+   - Bob will guide you through each required value
+
+5. **Restart Bob** to load the newly configured MCP servers
+
+6. **Verify installation**:
+   - All servers should appear in Bob's MCP server list
+   - Configuration file created at `.bob/mcp.json` in your workspace
+   - Server packages located at `~/apic-mcp/servers/`
+
+#### Directory Structure Created
+
+The automated setup creates a standardized, reproducible structure:
+
+```
+~/apic-mcp/                          # Root installation directory
+├── servers/                         # All MCP server packages
+│   ├── apic-analytics-mcp-server/
+│   │   ├── mcp.bob.json
+│   │   └── apic-analytics-mcp-server-0.0.1.tgz
+│   ├── apic-governance-mcp-server/
+│   │   ├── mcp.bob.json
+│   │   └── apic-governance-mcp-server-0.0.1.tgz
+│   ├── apic-management-mcp-server/
+│   │   ├── mcp.bob.json
+│   │   └── apic-management-mcp-server-0.0.1.tgz
+│   └── apic-ai-gateway-mcp-server/
+│       ├── mcp.bob.json
+│       └── apic-ai-gateway-mcp-server-0.0.1.tgz
+└── .git/                            # Repository metadata
+
+.bob/                                # Workspace configuration
+└── mcp.json                         # Generated MCP configuration
+```
+
+#### Manual Configuration (Alternative)
+
+If you prefer manual setup or need to troubleshoot:
+
+1. **Choose the template file** [`mcp.bob.json`](./analytics/mcp.bob.json) from the specific service folder
+2. **Fill in your APIC configuration details** in the template
+3. **Copy the configured mcp json** to your workspace `.bob` folder
+4. **Follow the official Bob setup guide**:
+   - Open [`IBM BOB MCP server setup`](https://www.ibm.com/think/tutorials/mcp-integration-ibm-bob)
+   - Follow the manual configuration instructions
+
+#### Troubleshooting Bob Setup
+
+**Command not found (`/init-apic-mcp`)**:
+
+- Ensure you're using a Bob version that supports custom commands
+- Verify the command file exists in Bob's commands directory
+- Try restarting Bob to refresh available commands
+
+**Installation fails**:
+
+- Check prerequisites: Git, Node.js v18+, npm must be installed
+- Verify network connectivity to GitHub
+- Review Bob's logs for specific error messages
+- Try manual configuration as a fallback
+
+**Servers don't appear after installation**:
+
+- Restart Bob completely (not just reload)
+- Verify `.bob/mcp.json` exists and contains valid JSON
+- Check that all `.tgz` files exist at the paths specified in the configuration
+- Review the [detailed installation guide](init-apic-mcp.md) for validation steps
+
+**Configuration updates**:
+
+- To update server configurations, re-run `/init-apic-mcp`
+- Existing configurations will be preserved unless you choose to overwrite
+- You can also manually edit `.bob/mcp.json`
+
+For comprehensive installation instructions, error handling, and troubleshooting, see the [detailed Bob command documentation](init-apic-mcp.md).
 
 ---
 

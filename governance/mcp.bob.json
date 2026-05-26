@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "apic-governance-mcp-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "-p",
+        "<path-to-npm-package-tar>",
+        "apic-governance-mcp-server"
+      ],
+      "env": {
+        "NODE_TLS_REJECT_UNAUTHORIZED": "<0-to-disable-certificate-validation-or-1-to-enable>",
+        "PROVIDER_ORG": "<your-provider-organization-name>",
+        "API_KEY": "<your-api-key>",
+        "client_id": "<your-client-id>",
+        "client_secret": "<your-client-secret>",
+        "APIC_PLATFORM_URL": "<your-apic-platform-url>",
+        "APIC_MANAGEMENT_URL": "<your-apic-management-url>"
+      }
+    }
+  }
+}
