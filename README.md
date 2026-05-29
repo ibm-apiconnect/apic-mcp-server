@@ -14,7 +14,7 @@ This MCP server can be integrated with various MCP clients such as **Claude Desk
 
 ### 💻 Suggested MCP Clients
 
-[![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=vsc&logoColor=white)](https://code.visualstudio.com/) [![Claude Desktop](https://img.shields.io/badge/Claude_Desktop-D97757?logo=claude&logoColor=fff)](https://claude.ai/download) [![IBM BOB](svg/ibm-bob.badge.svg)](https://www.ibm.com/products/bob)
+[![IBM BOB](svg/ibm-bob.badge.svg)](https://www.ibm.com/products/bob) [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=vsc&logoColor=white)](https://code.visualstudio.com/) [![Claude Desktop](https://img.shields.io/badge/Claude_Desktop-D97757?logo=claude&logoColor=fff)](https://claude.ai/download)
 
 ### ✅ Prerequisites
 
@@ -67,19 +67,6 @@ For example:
 
 ## 📝 Setup Instructions for suggested MCP Clients
 
-### [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/-0078d7.svg?logo=vsc&logoColor=white) `Visual Studio Code`](https://code.visualstudio.com/)
-
-#### Manual Configuration
-
-1. **Choose the template file** [`mcp.vscode.json`](./analytics/mcp.vscode.json) from the specific service folder
-2. **Fill in your APIC configuration details** in the template
-3. **Copy the configured mcp json** to your workspace `.vscode` folder
-4. **Follow the official VS Code setup guide**:
-   - Open [`VS Code MCP server setup`](https://code.visualstudio.com/docs/copilot/customization/mcp-servers#_add-an-mcp-server)
-   - Expand the section **`Add an MCP server to your workspace`** for detailed instructions
-
----
-
 ### [![IBM BOB](svg/ibm-bob.icon.svg) `IBM BOB`](https://www.ibm.com/products/bob)
 
 IBM Bob provides two setup methods: an automated command-based approach (recommended) and manual configuration.
@@ -107,7 +94,7 @@ Bob includes a built-in command that automates the entire installation and confi
    mkdir -p .bob/commands
 
    # Download the command file directly from GitHub
-   curl -o .bob/commands/init-apic-mcp.md https://github.com/ibm-apiconnect/apic-mcp-server/blob/main/init-apic-mcp.md
+   curl -o .bob/commands/init-apic-mcp.md https://raw.githubusercontent.com/ibm-apiconnect/apic-mcp-server/refs/heads/main/init-apic-mcp.md
    ```
 
    This makes the `/init-apic-mcp` command available in Bob.
@@ -207,6 +194,19 @@ If you prefer manual setup or need to troubleshoot:
 - You can also manually edit `.bob/mcp.json`
 
 For comprehensive installation instructions, error handling, and troubleshooting, see the [detailed Bob command documentation](init-apic-mcp.md).
+
+---
+
+### [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/-0078d7.svg?logo=vsc&logoColor=white) `Visual Studio Code`](https://code.visualstudio.com/)
+
+#### Manual Configuration
+
+1. **Choose the template file** [`mcp.vscode.json`](./analytics/mcp.vscode.json) from the specific service folder
+2. **Fill in your APIC configuration details** in the template
+3. **Copy the configured mcp json** to your workspace `.vscode` folder
+4. **Follow the official VS Code setup guide**:
+   - Open [`VS Code MCP server setup`](https://code.visualstudio.com/docs/copilot/customization/mcp-servers#_add-an-mcp-server)
+   - Expand the section **`Add an MCP server to your workspace`** for detailed instructions
 
 ---
 
