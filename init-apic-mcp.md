@@ -54,16 +54,28 @@ The installation follows a standardized directory structure for consistency:
 ├── servers/                         # All MCP server packages
 │   ├── apic-analytics-mcp-server/
 │   │   ├── mcp.bob.json
-│   │   └── apic-analytics-mcp-server-0.0.1.tgz
+│   │   ├── apic-analytics-mcp-server-0.0.1.tgz
+│   │   ├── commands/
+│   │   │   └── *.md
+│   │   └── skills/
 │   ├── apic-governance-mcp-server/
 │   │   ├── mcp.bob.json
-│   │   └── apic-governance-mcp-server-0.0.1.tgz
+│   │   ├── apic-governance-mcp-server-0.0.1.tgz
+│   │   ├── commands/
+│   │   │   └── *.md
+│   │   └── skills/
 │   ├── apic-management-mcp-server/
 │   │   ├── mcp.bob.json
-│   │   └── apic-management-mcp-server-0.0.1.tgz
+│   │   ├── apic-management-mcp-server-0.0.1.tgz
+│   │   ├── commands/
+│   │   │   └── *.md
+│   │   └── skills/
 │   └── apic-ai-gateway-mcp-server/
 │       ├── mcp.bob.json
-│       └── apic-ai-gateway-mcp-server-0.0.1.tgz
+│       ├── apic-ai-gateway-mcp-server-0.0.1.tgz
+│       ├── commands/
+│       │   └── *.md
+│       └── skills/
 ├── .git/                            # Git repository metadata
 └── README.md                        # Repository documentation
 ```
@@ -192,9 +204,13 @@ Scan the `~/apic-mcp/servers/` directory for MCP server configurations:
 2. For each subdirectory:
    - Check for `mcp.bob.json` file
    - Check for corresponding `.tgz` file
-   - Record server name and file paths
+
+- Check for optional `commands/` directory
+- Check for optional `skills/` directory
+- Record server name and file paths
 
 **Expected Servers** (as of current version):
+
 - `apic-analytics-mcp-server`
 - `apic-governance-mcp-server`
 - `apic-management-mcp-server`
@@ -202,14 +218,21 @@ Scan the `~/apic-mcp/servers/` directory for MCP server configurations:
 - `apic-ai-gateway-mcp-server`
 
 **Validation Checkpoint**: Verify each discovered server has both required files:
+
 - `mcp.bob.json` (configuration template)
 - `*.tgz` (server package)
+
+Also record optional assets for selected servers:
+
+- `commands/` (markdown command definitions)
+- `skills/` (skill definitions for Bob agent)
 
 ### Step 7: Present Server Selection Checklist
 
 After discovering all available MCP servers, present a checklist to the user for selection:
 
 **Selection Interface**:
+
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Available APIC MCP Servers
@@ -244,6 +267,7 @@ Instructions:
 ```
 
 **Selection Rules**:
+
 1. User must select at least one server
 2. Multiple servers can be selected
 3. Selection can be modified before confirmation
@@ -251,36 +275,134 @@ Instructions:
 
 **Validation Checkpoint**: Confirm user has selected at least one server before proceeding.
 
-### Step 8: Parse Server Configurations (Selected Servers Only)
+### Step 8: Prepare Command and Skill Installation (Selected Servers Only)
 
-For each **selected** MCP server:
+Immediately after server selection, prepare command and skill installation for only the selected servers.
 
-1. **Read `mcp.bob.json`**:
-   ```bash
-   # macOS/Linux
-   cat ~/apic-mcp/servers/apic-analytics-mcp-server/mcp.bob.json
+1. Ensure workspace command directory exists:
 
-   # Windows (PowerShell)
-   Get-Content "$env:USERPROFILE\apic-mcp\servers\apic-analytics-mcp-server\mcp.bob.json"
-   ```
+  ```bash
+  # macOS/Linux
+  mkdir -p .bob/commands
 
-2. **Identify placeholders**:
-   - Format: `${VARIABLE_NAME}` or `<PLACEHOLDER>`
-   - Common placeholders: `${API_KEY}`, `${BASE_URL}`, `${AUTH_TOKEN}`
+  # Windows (PowerShell)
+  New-Item -ItemType Directory -Force -Path ".bob\commands"
+  ```
 
-3. **Extract server metadata**:
-   - Server name
-   - Command configuration
-   - Required environment variables
-   - Optional environment variables
+1. Verify the official skills library is available via npm:
 
-**Validation Checkpoint**: Ensure all `mcp.bob.json` files for selected servers are valid JSON and parseable.
+  ```bash
+  # All platforms
+  npx skills --help
+  ```
 
-### Step 9: Choose Configuration Mode
+1. Resolve selected server asset directories:
 
-After server selection, ask the user how they want to provide configuration values:
+- Preferred location: `~/apic-mcp/servers/<server-name>/`
+- Fallback location: `~/apic-mcp/assets/<service>_build/`
+- Service name mapping rule:
+  - `apic-ai-gateway-mcp-server` -> `ai-gateway`
+  - `apic-management-ai-mcp-server` -> `management-ai`
+  - etc. (strip `apic-` prefix and `-mcp-server` suffix)
+
+1. For each selected server, detect:
+
+- `commands/` directory (contains command markdown files)
+- `skills/` directory (contains Bob skill definitions)
+
+**Validation Checkpoint**: At least one of `commands/` or `skills/` is available for each selected server. If both are missing for a selected server, warn and continue MCP server installation.
+
+### Step 9: Install Selected Commands and Skills
+
+Install command and skill assets before any configuration-value prompts.
+
+#### 9A. Install Commands into Workspace
+
+For each selected server with a `commands/` directory:
+
+1. Copy markdown command files into workspace `.bob/commands/`
+2. Replace files when names already exist
+3. Keep only markdown command files (`*.md`)
+
+```bash
+# macOS/Linux (example for one selected server)
+mkdir -p .bob/commands
+find ~/apic-mcp/servers/apic-ai-gateway-mcp-server/commands -type f -name "*.md" -exec cp -f {} .bob/commands/ \;
+
+# Windows (PowerShell) (example for one selected server)
+New-Item -ItemType Directory -Force -Path ".bob\commands" | Out-Null
+Get-ChildItem "$env:USERPROFILE\apic-mcp\servers\apic-ai-gateway-mcp-server\commands" -Filter "*.md" -File -Recurse |
+  ForEach-Object { Copy-Item $_.FullName ".bob\commands\" -Force }
+```
+
+If the server-specific `commands/` directory is only available in assets build output, use:
+
+```bash
+# macOS/Linux fallback example
+find ~/apic-mcp/assets/ai-gateway_build/commands -type f -name "*.md" -exec cp -f {} .bob/commands/ \;
+```
+
+#### 9B. Install Skills for Bob Agent
+
+For each selected server with a `skills/` directory, run:
+
+```bash
+# macOS/Linux example
+npx skills add ~/apic-mcp/servers/apic-ai-gateway-mcp-server/skills --agent bob
+
+# Windows (PowerShell) example
+npx skills add "$env:USERPROFILE\apic-mcp\servers\apic-ai-gateway-mcp-server\skills" --agent bob
+```
+
+If the server-specific `skills/` directory is only available in assets build output, use:
+
+```bash
+# macOS/Linux fallback example
+npx skills add ~/apic-mcp/assets/ai-gateway_build/skills --agent bob
+```
+
+**Validation Checkpoint**:
+
+- `.bob/commands/` contains copied command markdown files for selected servers
+- `npx skills add ... --agent bob` succeeds for each selected server that has skills
+- Log success/failure per selected server without exposing secrets
+
+### Step 10: Parse Server Configurations (Selected Servers Only)
+
+After command and skill installation, parse selected server config templates.
+
+For each selected MCP server:
+
+1. Read `mcp.bob.json`:
+
+  ```bash
+  # macOS/Linux
+  cat ~/apic-mcp/servers/apic-analytics-mcp-server/mcp.bob.json
+
+  # Windows (PowerShell)
+  Get-Content "$env:USERPROFILE\apic-mcp\servers\apic-analytics-mcp-server\mcp.bob.json"
+  ```
+
+1. Identify placeholders:
+
+- Format: `${VARIABLE_NAME}` or `<PLACEHOLDER>`
+- Common placeholders: `${API_KEY}`, `${BASE_URL}`, `${AUTH_TOKEN}`
+
+1. Extract server metadata:
+
+- Server name
+- Command configuration
+- Required environment variables
+- Optional environment variables
+
+**Validation Checkpoint**: Ensure all selected `mcp.bob.json` files are valid JSON and parseable.
+
+### Step 11: Choose Configuration Mode
+
+After command/skill installation and config parsing, ask the user how they want to provide configuration values:
 
 **Configuration Mode Selection**:
+
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Configuration Mode
@@ -291,14 +413,14 @@ You have selected 3 servers to configure.
 How would you like to provide configuration values?
 
 [1] Configure servers individually
-    - Configure each server one at a time
-    - Provide values specific to each server
-    - Recommended if servers need different configurations
+   - Configure each server one at a time
+   - Provide values specific to each server
+   - Recommended if servers need different configurations
 
 [2] Configure all servers at once
-    - Provide common values once for all servers
-    - Values are shared across all selected servers
-    - Faster if all servers use the same credentials
+   - Provide common values once for all servers
+   - Values are shared across all selected servers
+   - Faster if all servers use the same credentials
 
 Enter your choice [1 or 2]:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -306,7 +428,7 @@ Enter your choice [1 or 2]:
 
 **Validation Checkpoint**: Confirm user has selected a valid configuration mode (1 or 2).
 
-### Step 10: Collect User Configuration (Selected Servers Only)
+### Step 12: Collect User Configuration (Selected Servers Only)
 
 Configuration collection varies based on the mode selected:
 
@@ -317,6 +439,7 @@ Configure each server separately with server-specific values.
 **IMPORTANT**: Bob must ask for each configuration value ONE AT A TIME, waiting for user input after each prompt. DO NOT ask for all values at once or request JSON input.
 
 **Prompting Order**:
+
 1. Present servers one at a time
 2. For each server, ask for ONE configuration value at a time
 3. Wait for user response before asking for the next value
@@ -324,6 +447,7 @@ Configure each server separately with server-specific values.
 5. Complete all values for current server before moving to next server
 
 **Example Interaction** (showing one-value-at-a-time prompting):
+
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Configuring 3 selected servers individually
@@ -370,6 +494,7 @@ Enter API key for governance: _
 ```
 
 **Critical Rules for Bob**:
+
 - ❌ DO NOT show all fields at once and wait for user to fill them
 - ❌ DO NOT ask user to provide JSON or structured data
 - ❌ DO NOT ask for multiple values in a single prompt
@@ -386,6 +511,7 @@ Collect unique configuration values once and apply to all servers.
 **IMPORTANT**: Bob must ask for each unique configuration value ONE AT A TIME, waiting for user input after each prompt. DO NOT ask for all values at once or request JSON input.
 
 **Prompting Strategy**:
+
 1. Analyze all selected servers to identify unique configuration parameters
 2. Group common parameters (e.g., API_KEY, BASE_URL appear in multiple servers)
 3. Prompt for each unique parameter ONE AT A TIME
@@ -393,6 +519,7 @@ Collect unique configuration values once and apply to all servers.
 5. Apply provided values to all servers that require them
 
 **Example Interaction** (showing one-value-at-a-time prompting):
+
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Configuring all servers with shared values
@@ -450,6 +577,7 @@ Enter timeout in ms or press Enter for default: _
 ```
 
 **Critical Rules for Bob**:
+
 - ❌ DO NOT show all fields at once and wait for user to fill them
 - ❌ DO NOT ask user to provide JSON or structured data
 - ❌ DO NOT ask for multiple values in a single prompt
@@ -461,11 +589,13 @@ Enter timeout in ms or press Enter for default: _
 - ✅ DO group values logically (common, service-specific, optional)
 
 **Configuration Mapping**:
+
 - Common values (API_KEY, BASE_URL) are asked once and applied to all servers
 - Service-specific values (endpoints) are asked once per unique parameter
 - Each server's configuration file receives the appropriate values
 
 **Input Validation** (applies to both modes):
+
 - API_KEY: Non-empty string, minimum 10 characters
 - BASE_URL: Valid URL format (http:// or https://)
 - Endpoint URLs: Valid URL format
@@ -474,7 +604,7 @@ Enter timeout in ms or press Enter for default: _
 
 **Validation Checkpoint**: Confirm all required values collected for all selected servers before proceeding.
 
-### Step 11: Generate Absolute Paths (Selected Servers Only)
+### Step 13: Generate Absolute Paths (Selected Servers Only)
 
 Convert all file paths to absolute paths for consistency:
 
@@ -487,16 +617,18 @@ $INSTALL_DIR = (Resolve-Path "$env:USERPROFILE\apic-mcp").Path
 ```
 
 **Path Construction**:
+
 - `.tgz` file path: `${INSTALL_DIR}/servers/${SERVER_NAME}/${SERVER_NAME}-${VERSION}.tgz`
 - Example: `/Users/username/apic-mcp/servers/apic-analytics-mcp-server/apic-analytics-mcp-server-0.0.1.tgz`
 
 **Validation Checkpoint**: Verify all `.tgz` files for selected servers exist at constructed paths.
 
-### Step 12: Update Configuration File (Selected Servers Only)
+### Step 14: Update Configuration File (Selected Servers Only)
 
 Merge new server configurations with existing `.bob/mcp.json`:
 
 **Merge Strategy**:
+
 1. Read existing configuration
 2. Parse as JSON object
 3. For each selected server:
@@ -507,6 +639,7 @@ Merge new server configurations with existing `.bob/mcp.json`:
 5. Write updated JSON with proper formatting (2-space indentation)
 
 **Configuration Template**:
+
 ```json
 {
   "mcpServers": {
@@ -528,6 +661,7 @@ Merge new server configurations with existing `.bob/mcp.json`:
 ```
 
 **Validation Checkpoint**: Validate updated JSON syntax:
+
 ```bash
 # macOS/Linux
 cat .bob/mcp.json | python -m json.tool > /dev/null && echo "Valid JSON"
@@ -536,19 +670,23 @@ cat .bob/mcp.json | python -m json.tool > /dev/null && echo "Valid JSON"
 try { Get-Content .bob\mcp.json | ConvertFrom-Json; Write-Host "Valid JSON" } catch { Write-Host "Invalid JSON" }
 ```
 
-### Step 13: Verify Installation (Selected Servers Only)
+### Step 15: Verify Installation (Selected Servers Only)
 
 Perform comprehensive verification of the installation for selected servers:
 
 **Verification Checklist**:
+
 1. ✓ All `.tgz` files for selected servers exist at specified paths
 2. ✓ All required environment variables for selected servers are set
 3. ✓ `.bob/mcp.json` contains valid JSON
 4. ✓ All selected server configurations are present
 5. ✓ No placeholder values remain in configuration
-6. ✓ File permissions are correct (readable)
+6. ✓ `.bob/commands/` contains expected selected-server command files
+7. ✓ Skills were added for selected servers (from `skills add` command results)
+8. ✓ File permissions are correct (readable)
 
 **Automated Verification**:
+
 ```bash
 # macOS/Linux
 for server in ~/apic-mcp/servers/*/; do
@@ -575,11 +713,12 @@ Get-ChildItem "$env:USERPROFILE\apic-mcp\servers\" -Directory | ForEach-Object {
 
 **Validation Checkpoint**: All verification checks for selected servers must pass.
 
-### Step 14: Report Installation Status
+### Step 16: Report Installation Status
 
 Provide comprehensive installation summary:
 
 **Report Format**:
+
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 APIC MCP Server Installation Complete
@@ -592,6 +731,14 @@ Configured Servers (3 of 5 available):
   ✓ apic-analytics-mcp-server
   ✓ apic-governance-mcp-server
   ✓ apic-management-mcp-server
+
+Commands Installed:
+  ✓ 6 markdown command files copied to .bob/commands
+
+Skills Installed:
+  ✓ apic-analytics-mcp-server skills added for bob agent
+  ✓ apic-governance-mcp-server skills added for bob agent
+  ✓ apic-management-mcp-server skills added for bob agent
 
 Skipped Servers (not selected):
   - apic-management-ai-mcp-server
@@ -645,25 +792,36 @@ Troubleshooting:
    - Validate user inputs to prevent injection
    - Use secure file permissions (readable by user only)
 
+7. **Execution Order**:
+
+- Always install selected `commands/` and `skills/` assets immediately after server selection
+- Complete command and skill installation before asking any configuration-value questions
+
 ## Error Handling
 
 ### Git Not Installed
+
 **Error**: `git: command not found`
 
 **Resolution**:
+
 1. Display installation instructions for user's platform
 2. Provide download links
 3. Wait for user to install git
 4. Re-verify installation before proceeding
 
 ### Repository Clone Failure
+
 **Error**: `fatal: destination path 'apic-mcp' already exists`
 
 **Resolution**:
+
 1. Check if directory contains a git repository:
+
    ```bash
    cd ~/apic-mcp && git status
    ```
+
 2. If yes, offer to update: `git pull origin main`
 3. If no, offer options:
    - Backup existing directory
@@ -671,9 +829,11 @@ Troubleshooting:
    - Cancel installation
 
 ### Network Connectivity Issues
+
 **Error**: `fatal: unable to access 'https://github.com/...'`
 
 **Resolution**:
+
 1. Check internet connectivity
 2. Verify GitHub accessibility
 3. Check proxy/firewall settings
@@ -681,22 +841,52 @@ Troubleshooting:
 5. Offer manual download option
 
 ### Invalid JSON Configuration
+
 **Error**: `Unexpected token in JSON`
 
 **Resolution**:
+
 1. Backup corrupted file
 2. Attempt to repair JSON (remove trailing commas, fix quotes)
 3. If repair fails, recreate from template
 4. Restore user configurations from backup
 
 ### Missing Package Files
+
 **Error**: `.tgz file not found`
 
 **Resolution**:
+
 1. Verify repository clone completed successfully
 2. Check if `servers/` directory exists
 3. Re-clone repository if files missing
 4. Verify git checkout completed without errors
+
+### Missing Commands or Skills Assets
+
+**Error**: Selected server does not contain `commands/` and/or `skills/`
+
+**Resolution**:
+
+1. Check both locations:
+
+- `~/apic-mcp/servers/<server-name>/`
+- `~/apic-mcp/assets/<service>_build/`
+
+2. If `commands/` is missing, continue MCP server setup and report that command shortcuts were not installed
+2. If `skills/` is missing, continue MCP server setup and report that Bob skills were not installed
+3. If both are missing for all selected servers, complete MCP setup and show remediation steps to update repository/build artifacts
+
+### Skills CLI Installation Failure
+
+**Error**: `npx skills add <path> --agent bob` fails
+
+**Resolution**:
+
+1. Re-run: `npx skills --help` to confirm package availability
+2. Verify the skills path exists and contains valid skill files
+3. Retry `npx skills add <path> --agent bob` once per selected server
+4. If still failing, continue MCP setup, report skill-install failure, and provide manual retry command in final summary
 
 ### Permission Denied
 **Error**: `Permission denied` when creating directories/files

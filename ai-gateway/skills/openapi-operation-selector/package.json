@@ -1,0 +1,27 @@
+{
+    "name": "studio-kind-file-packager",
+    "version": "1.0.0",
+    "description": "Package API Studio Kind file assets with all their dependencies",
+    "main": "scripts/package_kind_files.js",
+    "scripts": {
+        "package": "node scripts/package_kind_files.js"
+    },
+    "keywords": [
+        "api-studio",
+        "kind",
+        "api",
+        "product",
+        "packaging",
+        "dependencies"
+    ],
+    "author": "API Connect GenAI Service",
+    "license": "MIT",
+    "dependencies": {
+        "archiver": "^7.0.0",
+        "commander": "^12.0.0",
+        "js-yaml": "^4.1.0"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}
