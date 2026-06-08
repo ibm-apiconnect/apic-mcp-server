@@ -1,5 +1,5 @@
 ---
-name: OpenAPI Operation Selector
+name: apic-openapi-operation-selector
 description: Present OpenAPI operations as numbered options, then return the chosen items as a JSON object mapping paths to HTTP methods.
 ---
 
