@@ -40,12 +40,14 @@ node .bob/skills/studio-kind-file-packager/scripts/package_kind_files.js --input
 ### Input Options
 
 The script accepts either:
+
 - **Name**: The name of a Kind file (e.g., "DPv6_Product", "WeatherApi")
 - **Path**: A relative or absolute path to a Kind file (e.g., "datapower-api-gateway/DPv6_Product_Weather/DPv6_Product.yml")
 
 ### Output
 
 The script will:
+
 1. Search for the specified Kind file
 2. Parse it to find all `$ref` and `$path` references
 3. Recursively process all referenced files
@@ -57,19 +59,23 @@ The script will:
 The skill understands these reference patterns commonly used in Kind files:
 
 ### $ref Pattern
+
 References to other Kind files using namespace:name:version format:
+
 ```yaml
 apis:
-  - $ref: DPv6_Product_Weather:WeatherApi:1.0
+    - $ref: DPv6_Product_Weather:WeatherApi:1.0
 plans:
-  - $ref: DPv6_Product_Weather:DPv6_Plan:1.0
+    - $ref: DPv6_Product_Weather:DPv6_Plan:1.0
 ```
 
 ### $path Pattern
+
 References to external files (OpenAPI specs, WSDL, etc.):
+
 ```yaml
 api-spec:
-  $path: ./WeatherApi-spec.yml
+    $path: ./WeatherApi-spec.yml
 ```
 
 ## Examples
@@ -118,8 +124,8 @@ node .bob/skills/studio-kind-file-packager/scripts/package_kind_files.js \
 1. **Initial File Discovery**: Locate the starting Kind file by name or path
 2. **Parse YAML**: Extract all `$ref` and `$path` references
 3. **Reference Resolution**:
-   - For `$ref`: Parse namespace:name:version format and locate the file
-   - For `$path`: Resolve relative paths from the current file's directory
+    - For `$ref`: Parse namespace:name:version format and locate the file
+    - For `$path`: Resolve relative paths from the current file's directory
 4. **Recursive Processing**: Add discovered files to a queue and repeat steps 2-3
 5. **Deduplication**: Track processed files to avoid infinite loops
 6. **Packaging**: Collect all unique files and create a zip archive
@@ -134,12 +140,14 @@ The zip archive preserves the original directory structure relative to the works
 - npm (Node Package Manager)
 
 Install dependencies:
+
 ```bash
 cd .bob/skills/studio-kind-file-packager
 npm install
 ```
 
 Required npm packages:
+
 - `js-yaml`: YAML parsing
 - `archiver`: ZIP archive creation
 - `commander`: Command-line interface
@@ -147,6 +155,7 @@ Required npm packages:
 ## Error Handling
 
 The script handles common errors gracefully:
+
 - **File Not Found**: Reports missing files but continues processing other references
 - **Invalid YAML**: Skips malformed files and reports the issue
 - **Circular References**: Detects and prevents infinite loops
@@ -155,6 +164,7 @@ The script handles common errors gracefully:
 ## Output Format
 
 The script outputs:
+
 1. **Progress Messages**: Shows which files are being processed
 2. **Dependency Tree**: Visual representation of the file relationships
 3. **File List**: Complete list of all files in the archive
