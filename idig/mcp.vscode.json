@@ -52,13 +52,13 @@
         }
     ],
     "servers": {
-        "apic-ai-gateway-mcp-server": {
+        "apic-idig-mcp-server": {
             "command": "npx",
             "args": [
                 "-y",
                 "-p",
                 "${input:tarPath}",
-                "apic-ai-gateway-mcp-server"
+                "apic-idig-mcp-server"
             ],
             "env": {
                 "PROVIDER_ORG": "${input:pOrg}",

@@ -16,27 +16,27 @@ Optional input:
 Workflow:
 
 1. Verify the user has provided either:
-   - A Kind file name (e.g., "DPv6_Product", "WeatherApi", "MCPServer")
-   - A relative or absolute path to a Kind file
+    - A Kind file name (e.g., "DPv6_Product", "WeatherApi", "MCPServer")
+    - A relative or absolute path to a Kind file
 2. Verify the user has provided the workspace directory path where Kind files are located.
 3. Run:
 
-   ```bash
-   node ./.bob/skills/studio-kind-file-packager/scripts/package_kind_files.js --input "<KIND_FILE_NAME_OR_PATH>" --workspace "<WORKSPACE_PATH>"
-   ```
+    ```bash
+    node ./.bob/skills/studio-kind-file-packager/scripts/package_kind_files.js --input "<KIND_FILE_NAME_OR_PATH>" --workspace "<WORKSPACE_PATH>"
+    ```
 
 4. Optionally, if the user wants a custom output name:
 
-   ```bash
-   node ./.bob/skills/studio-kind-file-packager/scripts/package_kind_files.js --input "<KIND_FILE_NAME_OR_PATH>" --workspace "<WORKSPACE_PATH>" --output "<CUSTOM_OUTPUT_NAME>.zip"
-   ```
+    ```bash
+    node ./.bob/skills/studio-kind-file-packager/scripts/package_kind_files.js --input "<KIND_FILE_NAME_OR_PATH>" --workspace "<WORKSPACE_PATH>" --output "<CUSTOM_OUTPUT_NAME>.zip"
+    ```
 
 5. The script will:
-   - Locate the specified Kind file
-   - Recursively resolve all `$ref` and `$path` dependencies
-   - Build a complete dependency graph
-   - Create a zip archive with all related files
-   - Display a list of all packaged files
+    - Locate the specified Kind file
+    - Recursively resolve all `$ref` and `$path` dependencies
+    - Build a complete dependency graph
+    - Create a zip archive with all related files
+    - Display a list of all packaged files
 
 Important rules:
 

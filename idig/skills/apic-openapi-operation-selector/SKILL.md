@@ -1,5 +1,5 @@
 ---
-name: OpenAPI Operation Selector
+name: apic-openapi-operation-selector
 description: Present OpenAPI operations as numbered options, then return the chosen items as a JSON object mapping paths to HTTP methods.
 ---
 
@@ -23,8 +23,7 @@ Use this skill when you need to inspect an OpenAPI or Swagger file, derive every
 ## Selection label rules
 
 - If an operation has an `operationId` and that `operationId` is unique across the entire document, show the `operationId`
-- Otherwise show `<METHOD> <path>`
-- Methods must be displayed in uppercase
+- Otherwise show `<http-method> <path>`
 - Ignore non-operation keys under a path item such as `summary`, `description`, `parameters`, and `servers`
 
 ## Implementation
@@ -38,11 +37,13 @@ node ./.bob/skills/openapi-operation-selector/select-operations.js ./path/to/ope
 ```
 
 This prints JSON containing:
+
 - `openApiFile`
 - `instructions`
 - `options` with `index`, `label`, `method`, `path`, and `operationId`
 
 **IMPORTANT**: The agent MUST:
+
 1. Show the numbered options to the user in a clear, readable format
 2. Ask the user which operations they want to select
 3. WAIT for the user to respond with their selection (e.g., "1,3,4" or "all" or "1")
@@ -52,24 +53,24 @@ Example options payload shape:
 
 ```json
 {
-  "openApiFile": "./example.yml",
-  "instructions": "Select one or more operation numbers using a comma-separated list such as \"1,3,4\". Then run the script again with --select-indexes.",
-  "options": [
-    {
-      "index": 1,
-      "label": "getWeather",
-      "method": "GET",
-      "path": "/weather",
-      "operationId": "getWeather"
-    },
-    {
-      "index": 2,
-      "label": "POST /pets",
-      "method": "POST",
-      "path": "/pets",
-      "operationId": null
-    }
-  ]
+    "openApiFile": "./example.yml",
+    "instructions": "Select one or more operation numbers using a comma-separated list such as \"1,3,4\". Then run the script again with --select-indexes.",
+    "options": [
+        {
+            "index": 1,
+            "label": "getWeather",
+            "method": "GET",
+            "path": "/weather",
+            "operationId": "getWeather"
+        },
+        {
+            "index": 2,
+            "label": "POST /pets",
+            "method": "POST",
+            "path": "/pets",
+            "operationId": null
+        }
+    ]
 }
 ```
 
@@ -84,6 +85,7 @@ node ./.bob/skills/openapi-operation-selector/select-operations.js ./path/to/ope
 Replace "1,2" with the actual indexes the user provided in their response.
 
 This prints JSON containing:
+
 - `selectedIndexes`
 - `selected`
 - `selectedOperations`
@@ -94,11 +96,11 @@ Example final output shape:
 
 ```json
 {
-  "selectedIndexes": [1, 2],
-  "selected": {
-    "/weather": ["get"],
-    "/pets": ["post"]
-  }
+    "selectedIndexes": [1, 2],
+    "selected": {
+        "/weather": ["get"],
+        "/pets": ["post"]
+    }
 }
 ```
 
@@ -106,11 +108,11 @@ If multiple methods are selected for the same path, they will be grouped togethe
 
 ```json
 {
-  "selectedIndexes": [1, 2, 3],
-  "selected": {
-    "/pets": ["get", "post"],
-    "/stores": ["delete"]
-  }
+    "selectedIndexes": [1, 2, 3],
+    "selected": {
+        "/pets": ["get", "post"],
+        "/stores": ["delete"]
+    }
 }
 ```
 

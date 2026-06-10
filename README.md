@@ -145,9 +145,9 @@ The automated setup creates a standardized, reproducible structure:
 │   ├── apic-management-mcp-server/
 │   │   ├── mcp.bob.json
 │   │   └── apic-management-mcp-server-0.0.1.tgz
-│   └── apic-ai-gateway-mcp-server/
+│   └── apic-idig-mcp-server/
 │       ├── mcp.bob.json
-│       └── apic-ai-gateway-mcp-server-0.0.1.tgz
+│       └── apic-idig-mcp-server-0.0.1.tgz
 └── .git/                            # Repository metadata
 
 .bob/                                # Workspace configuration

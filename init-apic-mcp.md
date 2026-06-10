@@ -70,9 +70,9 @@ The installation follows a standardized directory structure for consistency:
 │   │   ├── commands/
 │   │   │   └── *.md
 │   │   └── skills/
-│   └── apic-ai-gateway-mcp-server/
+│   └── apic-idig-mcp-server/
 │       ├── mcp.bob.json
-│       ├── apic-ai-gateway-mcp-server-0.0.1.tgz
+│       ├── apic-idig-mcp-server-0.0.1.tgz
 │       ├── commands/
 │       │   └── *.md
 │       └── skills/
@@ -215,7 +215,7 @@ Scan the `~/apic-mcp/servers/` directory for MCP server configurations:
 - `apic-governance-mcp-server`
 - `apic-management-mcp-server`
 - `apic-management-ai-mcp-server`
-- `apic-ai-gateway-mcp-server`
+- `apic-idig-mcp-server`
 
 **Validation Checkpoint**: Verify each discovered server has both required files:
 
@@ -252,7 +252,7 @@ Select the servers you want to install:
 [ ] apic-management-ai-mcp-server
     Description: AI-powered tools for OpenAPI generation and enhancement
 
-[ ] apic-ai-gateway-mcp-server
+[ ] apic-idig-mcp-server
     Description: AI Gateway tools for LLM provider management and REST to MCP conversion
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -301,7 +301,7 @@ Immediately after server selection, prepare command and skill installation for o
 - Preferred location: `~/apic-mcp/servers/<server-name>/`
 - Fallback location: `~/apic-mcp/assets/<service>_build/`
 - Service name mapping rule:
-  - `apic-ai-gateway-mcp-server` -> `ai-gateway`
+  - `apic-idig-mcp-server` -> `idig`
   - `apic-management-ai-mcp-server` -> `management-ai`
   - etc. (strip `apic-` prefix and `-mcp-server` suffix)
 
@@ -327,11 +327,11 @@ For each selected server with a `commands/` directory:
 ```bash
 # macOS/Linux (example for one selected server)
 mkdir -p .bob/commands
-find ~/apic-mcp/servers/apic-ai-gateway-mcp-server/commands -type f -name "*.md" -exec cp -f {} .bob/commands/ \;
+find ~/apic-mcp/servers/apic-idig-mcp-server/commands -type f -name "*.md" -exec cp -f {} .bob/commands/ \;
 
 # Windows (PowerShell) (example for one selected server)
 New-Item -ItemType Directory -Force -Path ".bob\commands" | Out-Null
-Get-ChildItem "$env:USERPROFILE\apic-mcp\servers\apic-ai-gateway-mcp-server\commands" -Filter "*.md" -File -Recurse |
+Get-ChildItem "$env:USERPROFILE\apic-mcp\servers\apic-idig-mcp-server\commands" -Filter "*.md" -File -Recurse |
   ForEach-Object { Copy-Item $_.FullName ".bob\commands\" -Force }
 ```
 
@@ -339,7 +339,7 @@ If the server-specific `commands/` directory is only available in assets build o
 
 ```bash
 # macOS/Linux fallback example
-find ~/apic-mcp/assets/ai-gateway_build/commands -type f -name "*.md" -exec cp -f {} .bob/commands/ \;
+find ~/apic-mcp/assets/idig_build/commands -type f -name "*.md" -exec cp -f {} .bob/commands/ \;
 ```
 
 #### 9B. Install Skills for Bob Agent
@@ -348,17 +348,17 @@ For each selected server with a `skills/` directory, run:
 
 ```bash
 # macOS/Linux example
-npx skills add ~/apic-mcp/servers/apic-ai-gateway-mcp-server/skills --agent bob
+npx skills add ~/apic-mcp/servers/apic-idig-mcp-server/skills --agent bob
 
 # Windows (PowerShell) example
-npx skills add "$env:USERPROFILE\apic-mcp\servers\apic-ai-gateway-mcp-server\skills" --agent bob
+npx skills add "$env:USERPROFILE\apic-mcp\servers\apic-idig-mcp-server\skills" --agent bob
 ```
 
 If the server-specific `skills/` directory is only available in assets build output, use:
 
 ```bash
 # macOS/Linux fallback example
-npx skills add ~/apic-mcp/assets/ai-gateway_build/skills --agent bob
+npx skills add ~/apic-mcp/assets/idig_build/skills --agent bob
 ```
 
 **Validation Checkpoint**:
@@ -742,7 +742,7 @@ Skills Installed:
 
 Skipped Servers (not selected):
   - apic-management-ai-mcp-server
-  - apic-ai-gateway-mcp-server
+  - apic-idig-mcp-server
 
 Next Steps:
   1. Restart your IDE/editor to load the new MCP servers

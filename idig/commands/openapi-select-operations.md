@@ -13,9 +13,9 @@ Workflow:
 1. Verify the user has provided the path to an OpenAPI or Swagger file in JSON, YAML, or YML format.
 2. Run:
 
-   ```bash
-   node ./.bob/skills/openapi-operation-selector/select-operations.js "<OPENAPI_FILE_PATH>" --list
-   ```
+    ```bash
+    node ./.bob/skills/openapi-operation-selector/select-operations.js "<OPENAPI_FILE_PATH>" --list
+    ```
 
 3. Present the returned numbered options to the user in chat in a clear readable list.
 4. Ask the user which operations they want to select.
@@ -23,9 +23,9 @@ Workflow:
 6. Do not proceed until the user has explicitly provided their selection.
 7. Run:
 
-   ```bash
-   node ./.bob/skills/openapi-operation-selector/select-operations.js "<OPENAPI_FILE_PATH>" --select-indexes "<USER_SELECTED_INDEXES>"
-   ```
+    ```bash
+    node ./.bob/skills/openapi-operation-selector/select-operations.js "<OPENAPI_FILE_PATH>" --select-indexes "<USER_SELECTED_INDEXES>"
+    ```
 
 8. Return the `selected` JSON object mapping paths to arrays of lowercase HTTP methods.
 
