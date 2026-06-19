@@ -20,14 +20,8 @@
         },
         {
             "type": "promptString",
-            "id": "platformUrl",
-            "description": "Standalone Platform URL",
-            "password": false
-        },
-        {
-            "type": "promptString",
-            "id": "managementUrl",
-            "description": "Standalone Management URL",
+            "id": "standaloneUrl",
+            "description": "Standalone Platform Base URL",
             "password": false
         },
         {
@@ -40,19 +34,18 @@
         }
     ],
     "servers": {
-        "apic-idig-standalone-mcp-server": {
+        "idig-standalone-mcp-server": {
             "command": "npx",
             "args": [
                 "-y",
                 "-p",
                 "${input:tarPath}",
-                "apic-idig-standalone-mcp-server"
+                "idig-standalone-mcp-server"
             ],
             "env": {
                 "STANDALONE_USERNAME": "${input:username}",
                 "STANDALONE_PASSWORD": "${input:password}",
-                "APIC_PLATFORM_URL": "${input:platformUrl}",
-                "APIC_MANAGEMENT_URL": "${input:managementUrl}",
+                "STANDALONE_URL": "${input:standaloneUrl}",
                 "NODE_TLS_REJECT_UNAUTHORIZED": "${input:validateCertificates}"
             }
         }

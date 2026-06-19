@@ -1,12 +1,12 @@
 {
   "mcpServers": {
-    "apic-idig-mcp-server": {
+    "idig-mcp-server": {
       "command": "npx",
       "args": [
         "-y",
         "-p",
         "<path-to-npm-package-tar>",
-        "apic-idig-mcp-server"
+        "idig-mcp-server"
       ],
       "env": {
         "NODE_TLS_REJECT_UNAUTHORIZED": "<0-to-disable-certificate-validation-or-1-to-enable>",
