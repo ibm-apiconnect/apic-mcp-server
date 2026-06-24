@@ -28,12 +28,12 @@ Use this skill when you need to inspect an OpenAPI or Swagger file, derive every
 
 ## Implementation
 
-Run the supporting Node.js script at [`select-operations.js`](.bob/skills/openapi-operation-selector/select-operations.js).
+Run the supporting Node.js script at [`select-operations.js`](.bob/skills/apic-openapi-operation-selector/select-operations.js).
 
 ### Step 1: Produce numbered options
 
 ```bash
-node ./.bob/skills/openapi-operation-selector/select-operations.js ./path/to/openapi.yml --list
+node ./.bob/skills/apic-openapi-operation-selector/select-operations.js ./path/to/openapi.yml --list
 ```
 
 This prints JSON containing:
@@ -79,7 +79,7 @@ Example options payload shape:
 **CRITICAL**: Only execute this step AFTER the user has provided their selection.
 
 ```bash
-node ./.bob/skills/openapi-operation-selector/select-operations.js ./path/to/openapi.yml --select-indexes "1,2"
+node ./.bob/skills/apic-openapi-operation-selector/select-operations.js ./path/to/openapi.yml --select-indexes "1,2"
 ```
 
 Replace "1,2" with the actual indexes the user provided in their response.

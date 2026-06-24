@@ -6,7 +6,7 @@ const path = require('path');
 const HTTP_METHODS = ['get', 'post', 'put', 'delete', 'patch', 'head', 'options', 'trace'];
 
 function printUsage() {
-    console.error('Usage: node ./.bob/skills/openapi-operation-selector/select-operations.js <openapi-file> [--list | --select-indexes "1,3,4"]');
+    console.error('Usage: node ./.bob/skills/apic-openapi-operation-selector/select-operations.js <openapi-file> [--list | --select-indexes "1,3,4"]');
 }
 
 function parseArgs(argv) {

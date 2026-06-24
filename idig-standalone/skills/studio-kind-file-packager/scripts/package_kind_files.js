@@ -328,9 +328,25 @@ class KindFilePackager {
             archive.pipe(output);
 
             // Add all processed files to the archive
+            // If files are at workspace root, use workspace name as subdirectory
+            // Otherwise use 'project' as default subdirectory
             const sortedFiles = Array.from(this.processedFiles).sort();
+
+            // Determine if files are at workspace root or in subdirectories
+            let useWorkspaceName = true;
             for (const filePath of sortedFiles) {
-                const arcname = path.relative(this.workspaceRoot, filePath);
+                const relativePath = path.relative(this.workspaceRoot, filePath);
+                if (relativePath.includes(path.sep)) {
+                    useWorkspaceName = false;
+                    break;
+                }
+            }
+
+            const subdirName = useWorkspaceName ? path.basename(this.workspaceRoot) : 'project';
+
+            for (const filePath of sortedFiles) {
+                const filename = path.basename(filePath);
+                const arcname = path.join(subdirName, filename);
                 archive.file(filePath, { name: arcname });
                 console.log(`  Added: ${arcname}`);
             }

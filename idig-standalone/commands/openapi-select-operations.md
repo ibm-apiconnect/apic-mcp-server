@@ -14,7 +14,7 @@ Workflow:
 2. Run:
 
     ```bash
-    node ./.bob/skills/openapi-operation-selector/select-operations.js "<OPENAPI_FILE_PATH>" --list
+    node ./.bob/skills/apic-openapi-operation-selector/select-operations.js "<OPENAPI_FILE_PATH>" --list
     ```
 
 3. Present the returned numbered options to the user in chat in a clear readable list.
@@ -24,7 +24,7 @@ Workflow:
 7. Run:
 
     ```bash
-    node ./.bob/skills/openapi-operation-selector/select-operations.js "<OPENAPI_FILE_PATH>" --select-indexes "<USER_SELECTED_INDEXES>"
+    node ./.bob/skills/apic-openapi-operation-selector/select-operations.js "<OPENAPI_FILE_PATH>" --select-indexes "<USER_SELECTED_INDEXES>"
     ```
 
 8. Return the `selected` JSON object mapping paths to arrays of lowercase HTTP methods.
