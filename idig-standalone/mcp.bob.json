@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "idig-standalone-mcp-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "-p",
+        "<path-to-npm-package-tar>",
+        "idig-standalone-mcp-server"
+      ],
+      "env": {
+        "NODE_TLS_REJECT_UNAUTHORIZED": "<0-to-disable-certificate-validation-or-1-to-enable>",
+        "STANDALONE_URL": "<your-standalone-base-url>",
+        "STANDALONE_USERNAME": "<your-standalone-username>",
+        "STANDALONE_PASSWORD": "<your-standalone-password>"
+      }
+    }
+  }
+}
