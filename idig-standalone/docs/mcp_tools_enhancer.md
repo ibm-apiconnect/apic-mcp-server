@@ -29,23 +29,12 @@ This Operation displays the following detail:
 
 **Parameters**:
 
-#### Table 1. Parameters for IBM API Studio
-| Parameter | Required | Description | Default |
-| -------- | ------- | -------- | ------- |
-| mcpSpec   | Yes    | The MCPTools Kind file containing the MCP tools to be enhanced. | None |
-
-**Sample Prompts (IBM API Studio)**:
-
-```text
-Enhance the MCP tools in @mcptool_file.
-```
-
-#### Table 2. Parameters for [BYOCA](./byoca.md)
+#### Table 1. Parameters for the Enhance MCP Tools operation
 | Parameter | Required | Description | Default |
 | -------- | ------- | -------- | ------- |
 | mcpSpecFilePath   | Yes    | The absolute file path to the MCPTools Kind file containing the MCP tools to be enhanced. | None |
 
-**Sample Prompts (BYOCA)**:
+**Sample Prompts**:
 
 ```text
 Enhance the MCP tools in /path/to/mcptool_file.yaml

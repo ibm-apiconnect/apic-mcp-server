@@ -14,7 +14,6 @@
 **Tool Details**:
 - This tool assists users with the task of generating MCP Servers from their OpenAPI specifications.
 - The generated MCP tools are created from the available operations in the OpenAPI specification.
-- **Note**: This tool is available in IBM API Studio and for [BYOCA](./byoca.md)
 
 ## Operation details
 
@@ -35,41 +34,14 @@ This Operation displays the following details:
 
 **Parameters**:
 
-#### Table 1. Parameters for IBM API Studio
-| Parameter | Required | Description | Default |
-| -------- | ------- | -------- | ------- |
-| spec   | Yes    | The OpenAPI specification from which the MCP Specification is to be generated. | None |
-| selectedOperations   | No    | An optional map of operations to be included as tools. | None |
-| xIbmProject   | No    | An optional namespace of the studio project. | None |
-
-**Note:** By default, all operations are included as tools if `selectedOperations` is not specified.
-
-**Sample Prompts (IBM API Studio)**:
-
-```text
-Generate a MCP spec for @openapi_file.
-```
-
-```text
-Create a MCP Spec for this OpenAPI @openapi_file.
-```
-
-```text
-Convert this OpenAPI @openapi_file to MCP for these operations: {"/pets": ["get", "post"]}.
-```
-
-```text
-Generate a MCP spec for @openapi_file in the apic-project namespace.
-```
-
-#### Table 2. Parameters for [BYOCA](./byoca.md)
+#### Table 1. Parameters for the Generate MCP Specifications from an OpenAPI file operation
 | Parameter | Required | Description | Default |
 | -------- | ------- | -------- | ------- |
 | specFilePath  | Yes    | The absolute file path to the OpenAPI specification file from which the MCP Specification is to be generated. | None |
 | selectedOperations   | No    | An optional map of operations to be included as tools. | None |
 | xIbmProject   | No    | An optional namespace of the studio project. | None |
 
-**Sample Prompts (BYOCA)**:
+**Sample Prompts**:
 
 ```text
 Generate a MCP spec for /path/to/openapi_file.yaml
@@ -79,12 +51,27 @@ Generate a MCP spec for /path/to/openapi_file.yaml
 Convert /path/to/openapi_file.yaml to MCP for these operations: {"/pets": ["get", "post"]}
 ```
 
-**API Agent Quick Commands**
+## Skills
+
+### apic-openapi-operation-selector
+
+The OpenAPI Operation Selector skill helps you select specific operations from an OpenAPI specification that should be converted to MCP tools. The skill reads your OpenAPI file and creates a map of paths and HTTP methods, allowing you to choose which operations to include in the conversion.
+
+**How it works:**
+1. The skill analyzes your OpenAPI file and presents all available operations as numbered options
+2. You select the operations you want to convert by providing their corresponding numbers
+3. The skill generates a JSON mapping of selected paths to HTTP methods
+
+**Integration with REST to MCP:**
+This skill can be triggered immediately after invoking the REST to MCP tool. The tool automatically uses the output of this skill as the `selectedOperations` parameter.
+
+**Installation:**
+This skill should already be installed if you used the `init-apic-mcp` command for Bob setup. Otherwise, you can install it by following [these steps](../../../init-apic-mcp.md#9b-install-skills-for-bob-agent).
+
+**Sample Usage:**
+
 ```text
-/rest_to_mcp_generator spec: @openapi_file
-```
-```text
-/rest_to_mcp_generator spec: @openapi_file selectedOperations: {"/pets": ["get", "post"]}
+/openapi-select-operations @openapi_file.json
 ```
 
 **Next Action Suggested**:
