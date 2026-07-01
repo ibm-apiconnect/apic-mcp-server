@@ -76,7 +76,7 @@ IBM Bob provides two setup methods: an automated skill-based approach (recommend
 Bob uses a skill called `init-apic-ai-assets` that automates the entire installation and configuration process. Install it with a single command:
 
 ```bash
-npx -y skills -y https://github.com/ibm-apiconnect/apic-mcp-server/skills -a bob -a github-copilot
+npx -y skills add -y https://github.com/ibm-apiconnect/apic-mcp-server/skills -a bob -a github-copilot
 ```
 
 Once installed, **trigger the skill** in Bob by typing:
