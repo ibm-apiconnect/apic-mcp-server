@@ -76,13 +76,13 @@ IBM Bob provides two setup methods: an automated skill-based approach (recommend
 Bob uses a skill called `init-apic-ai-assets` that automates the entire installation and configuration process. Install it with a single command:
 
 ```bash
-npx -y skills add -y https://github.com/ibm-apiconnect/apic-mcp-server/skills -a bob -a github-copilot
+npx -y skills add -y https://github.com/ibm-apiconnect/apic-mcp-server/skills -a bob
 ```
 
-Once installed, **trigger the skill** in Bob by typing:
+Once installed, open the chat, ensure in `Agent` mode and type `/` in the chat and select `init-apic-ai-assets` command and hit `enter`:
 
 ```txt
-@bob init-apic-ai-assets
+/init-apic-ai-assets
 ```
 
 The skill will automatically:
@@ -137,6 +137,30 @@ If you prefer manual setup or need to troubleshoot:
 ---
 
 ### [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/-0078d7.svg?logo=vsc&logoColor=white) `Visual Studio Code`](https://code.visualstudio.com/)
+
+#### Automated Setup (Recommended)
+
+VS Code co-pilot uses a skill called `init-apic-ai-assets` that automates the entire installation and configuration process. Install it with a single command:
+
+```bash
+npx -y skills add -y https://github.com/ibm-apiconnect/apic-mcp-server/skills -a github-copilot
+```
+
+Once installed, open the chat, ensure in `Agent` mode and type `/` in the chat and select `init-apic-ai-assets` command and hit `enter`:
+
+```txt
+/init-apic-ai-assets
+```
+
+The skill will automatically:
+
+- ✅ Ask which IBM product you are setting up (IBM API Connect or IDIG standalone)
+- ✅ Verify prerequisites (Git, Node.js v20+, npm)
+- ✅ Clone the official APIC MCP server repository to `~/apic-mcp/`
+- ✅ Install the API Studio CLI (`@apistudio/apim-cli`)
+- ✅ Prompt you for required configuration values (API keys, URLs, etc.) **one at a time**
+- ✅ Generate the `.vscode/mcp.json` configuration file with absolute paths
+- ✅ Validate the complete installation
 
 #### Manual Configuration
 
