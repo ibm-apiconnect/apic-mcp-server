@@ -69,90 +69,32 @@ For example:
 
 ### [![IBM BOB](svg/ibm-bob.icon.svg) `IBM BOB`](https://www.ibm.com/products/bob)
 
-IBM Bob provides two setup methods: an automated command-based approach (recommended) and manual configuration.
+IBM Bob provides two setup methods: an automated skill-based approach (recommended) and manual configuration.
 
 #### Automated Setup (Recommended)
 
-Bob includes a built-in command that automates the entire installation and configuration process:
+Bob uses a skill called `init-apic-ai-assets` that automates the entire installation and configuration process. Install it with a single command:
 
-1. **Copy the command file to your workspace**:
-
-   **Option A: If you have the repository files locally**:
-
-   ```bash
-   # Create the commands directory if it doesn't exist
-   mkdir -p .bob/commands
-
-   # Copy the command file from the repository
-   cp init-apic-mcp.md .bob/commands/
-   ```
-
-   **Option B: If reading online (download directly)**:
-
-   ```bash
-   # Create the commands directory if it doesn't exist
-   mkdir -p .bob/commands
-
-   # Download the command file directly from GitHub
-   curl -o .bob/commands/init-apic-mcp.md https://raw.githubusercontent.com/ibm-apiconnect/apic-mcp-server/refs/heads/main/init-apic-mcp.md
-   ```
-
-   This makes the `/init-apic-mcp` command available in Bob.
-
-2. **Trigger the setup command** in Bob by typing:
-
-   ```txt
-   /init-apic-mcp
-   ```
-
-   The command will appear in the autocomplete list when you type `/` in Bob's chat.
-
-3. **Bob will automatically**:
-   - ✅ Verify prerequisites (Git, Node.js v18+, npm)
-   - ✅ Create standardized directory structure at `~/apic-mcp/servers/`
-   - ✅ Clone the official APIC MCP server repository
-   - ✅ Discover all available MCP servers in the repository
-   - ✅ Prompt you for required configuration values (API keys, URLs, etc.)
-   - ✅ Generate the `.bob/mcp.json` configuration file with absolute paths
-   - ✅ Validate the complete installation
-
-4. **Provide configuration values** when prompted:
-   - API keys for your APIC instance
-   - Base URLs for APIC services
-   - Other service-specific settings
-   - Bob will guide you through each required value
-
-5. **Restart Bob** to load the newly configured MCP servers
-
-6. **Verify installation**:
-   - All servers should appear in Bob's MCP server list
-   - Configuration file created at `.bob/mcp.json` in your workspace
-   - Server packages located at `~/apic-mcp/servers/`
-
-#### Directory Structure Created
-
-The automated setup creates a standardized, reproducible structure:
-
+```bash
+npx -y skills add -y https://github.com/ibm-apiconnect/apic-mcp-server/skills -a bob -a github-copilot
 ```
-~/apic-mcp/                          # Root installation directory
-├── servers/                         # All MCP server packages
-│   ├── apic-analytics-mcp-server/
-│   │   ├── mcp.bob.json
-│   │   └── apic-analytics-mcp-server-0.0.1.tgz
-│   ├── apic-governance-mcp-server/
-│   │   ├── mcp.bob.json
-│   │   └── apic-governance-mcp-server-0.0.1.tgz
-│   ├── apic-management-mcp-server/
-│   │   ├── mcp.bob.json
-│   │   └── apic-management-mcp-server-0.0.1.tgz
-│   └── apic-idig-mcp-server/
-│       ├── mcp.bob.json
-│       └── apic-idig-mcp-server-0.0.1.tgz
-└── .git/                            # Repository metadata
 
-.bob/                                # Workspace configuration
-└── mcp.json                         # Generated MCP configuration
+Once installed, **trigger the skill** in Bob by typing:
+
+```txt
+@bob init-apic-ai-assets
 ```
+
+The skill will automatically:
+- ✅ Ask which IBM product you are setting up (IBM API Connect or IDIG standalone)
+- ✅ Verify prerequisites (Git, Node.js v20+, npm)
+- ✅ Clone the official APIC MCP server repository to `~/apic-mcp/`
+- ✅ Install the API Studio CLI (`@apistudio/apim-cli`)
+- ✅ Prompt you for required configuration values (API keys, URLs, etc.) **one at a time**
+- ✅ Generate the `.bob/mcp.json` configuration file with absolute paths
+- ✅ Validate the complete installation
+
+**Restart Bob** after the skill completes to load the newly configured MCP servers.
 
 #### Manual Configuration (Alternative)
 
@@ -167,15 +109,15 @@ If you prefer manual setup or need to troubleshoot:
 
 #### Troubleshooting Bob Setup
 
-**Command not found (`/init-apic-mcp`)**:
+**Skill not found (`init-apic-ai-assets`)**:
 
-- Ensure you're using a Bob version that supports custom commands
-- Verify the command file exists in Bob's commands directory
-- Try restarting Bob to refresh available commands
+- Ensure the skill was installed successfully via the `npx -y skills` command above
+- Verify you are using a Bob version that supports skills
+- Try restarting Bob to refresh available skills
 
 **Installation fails**:
 
-- Check prerequisites: Git, Node.js v18+, npm must be installed
+- Check prerequisites: Git, Node.js v20+, npm must be installed
 - Verify network connectivity to GitHub
 - Review Bob's logs for specific error messages
 - Try manual configuration as a fallback
@@ -185,15 +127,12 @@ If you prefer manual setup or need to troubleshoot:
 - Restart Bob completely (not just reload)
 - Verify `.bob/mcp.json` exists and contains valid JSON
 - Check that all `.tgz` files exist at the paths specified in the configuration
-- Review the [detailed installation guide](init-apic-mcp.md) for validation steps
 
 **Configuration updates**:
 
-- To update server configurations, re-run `/init-apic-mcp`
+- To update server configurations, re-run the `init-apic-ai-assets` skill
 - Existing configurations will be preserved unless you choose to overwrite
 - You can also manually edit `.bob/mcp.json`
-
-For comprehensive installation instructions, error handling, and troubleshooting, see the [detailed Bob command documentation](init-apic-mcp.md).
 
 ---
 
