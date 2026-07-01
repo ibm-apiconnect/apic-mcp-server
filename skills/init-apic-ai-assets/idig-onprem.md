@@ -164,8 +164,15 @@ NOTE: The `bin` command to invoke the APIM CLI is `apic`
 Also install the API Studio build-project skill:
 
 ```bash
-# All platforms
-npx -y skills add -y https://github.com/ibm-apiconnect/api-studio-skills/tree/develop --skill api-studio-build-project -a bob -a github-copilot
+# For bobide
+npx -y skills add -y https://github.com/ibm-apiconnect/api-studio-skills/tree/develop --skill api-studio-build-project --skill api-studio-project-manager -a bob
+```
+
+For GitHub Co-pilot:
+
+```bash
+# For GitHub co-pilot
+npx -y skills add -y https://github.com/ibm-apiconnect/api-studio-skills/tree/develop --skill api-studio-build-project --skill api-studio-project-manager -a github-copilot
 ```
 
 If either command fails:
@@ -188,10 +195,10 @@ For each skill folder found, run:
 
 ```bash
 # macOS/Linux
-npx -y skills add -y ~/apic-mcp/idig-onprem/skills/<skill-folder> -a bob -a github-copilot
+npx -y skills add -y ~/apic-mcp/idig-onprem/skills/<skill-folder> -a <agent (bob or github-copilot)>
 
 # Windows (PowerShell)
-npx -y skills add -y "$env:USERPROFILE\apic-mcp\idig-onprem\skills\<skill-folder>" -a bob -a github-copilot
+npx -y skills add -y "$env:USERPROFILE\apic-mcp\idig-onprem\skills\<skill-folder>" -a <agent (bob or github-copilot)>
 ```
 
 **Rules**:
@@ -325,6 +332,7 @@ Configured Server:
 Additional Dependencies:
   ✓ @apistudio/apim-cli installed globally
   ✓ api-studio-build-project skill added for bob and github-copilot agents
+  ✓ api-studio-project-manager skill added for bob and github-copilot agents
 
 [For each bundled skill installed:]
   ✓ <skill-name> skill added for bob and github-copilot agents
@@ -376,12 +384,12 @@ Run `git -C ~/apic-mcp sparse-checkout add idig-onprem/` followed by `git -C ~/a
 
 ### API Studio Skill Installation Failure
 
-**Error**: `npx -y skills add ... --skill api-studio-build-project` fails
+**Error**: `npx -y skills add ... --skill api-studio-build-project --skill api-studio-project-manager` fails
 
 1. Verify network access to `github.com`.
 2. Retry once. On continued failure, include the manual command in the report:
    ```bash
-   npx -y skills add -y https://github.com/ibm-apiconnect/api-studio-skills/tree/develop --skill api-studio-build-project -a bob -a github-copilot
+   npx -y skills add -y https://github.com/ibm-apiconnect/api-studio-skills/tree/develop --skill api-studio-build-project --skill api-studio-project-manager -a <agent (bob or github-copilot)>
    ```
 
 ### Bundled Skill Installation Failure
@@ -392,10 +400,10 @@ Run `git -C ~/apic-mcp sparse-checkout add idig-onprem/` followed by `git -C ~/a
 2. Retry once. On continued failure, include the manual command in the final report:
    ```bash
    # macOS/Linux
-   npx -y skills add -y ~/apic-mcp/idig-onprem/skills/<skill-folder> -a bob -a github-copilot
+   npx -y skills add -y ~/apic-mcp/idig-onprem/skills/<skill-folder> -a <agent (bob or github-copilot)>
 
    # Windows (PowerShell)
-   npx -y skills add -y "$env:USERPROFILE\apic-mcp\idig-onprem\skills\<skill-folder>" -a bob -a github-copilot
+   npx -y skills add -y "$env:USERPROFILE\apic-mcp\idig-onprem\skills\<skill-folder>" -a <agent (bob or github-copilot)>
    ```
 
 ### Permission Denied
