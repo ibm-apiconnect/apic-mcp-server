@@ -1,11 +1,24 @@
 ---
 name: apic-openapi-operation-selector
-description: Present OpenAPI operations as numbered options, then return the chosen items as a JSON object mapping paths to HTTP methods.
+description: >
+  Use this skill whenever you need to let the user choose which OpenAPI/Swagger
+  operations to include before converting or processing a REST spec — for example
+  as the pre-step for RestToMCPGenerator (REST-to-MCP conversion), or any other
+  flow that requires a selectedOperations map (path → HTTP methods). Presents
+  every path+method as a numbered list, waits for the user's selection, and
+  returns a JSON object mapping paths to HTTP method arrays ready to pass as
+  the `selectedOperations` argument.
 ---
 
 # OpenAPI Operation Selector
 
-Use this skill when you need to inspect an OpenAPI or Swagger file, derive every unique path and HTTP method combination, present them to the user as numbered selectable options, collect the user's numeric choices, and only then print the chosen values as a JSON object mapping paths to their HTTP methods.
+Use this skill whenever:
+
+- The user wants to **convert a REST/OpenAPI spec to MCP** (via `RestToMCPGenerator`) and has **not already provided `selectedOperations`** — this skill is the required pre-step that collects the selection.
+- Any other tool or workflow needs a `selectedOperations` map (an object mapping paths to arrays of HTTP methods) before it can proceed.
+- The user says things like "which operations should I include?", "let me pick the endpoints", "select operations from my spec", or "convert some operations from this OpenAPI file".
+
+Concretely: when `RestToMCPGenerator` responds with `"WAITING ON USER INPUT for selectedOperations"`, **activate this skill immediately** to collect the selection, then re-invoke `RestToMCPGenerator` with the resulting `selected` object as `selectedOperations`.
 
 ## Inputs
 
@@ -117,6 +130,18 @@ If multiple methods are selected for the same path, they will be grouped togethe
         "/stores": ["delete"]
     }
 }
+```
+
+## Handoff after selection
+
+Once Step 2 has produced the `selected` object, **resume the originating tool or workflow** using that object:
+
+- **For `RestToMCPGenerator`**: call the tool again, passing the `selected` JSON (stringified) as the `selectedOperations` argument and the same OpenAPI file. Do not ask the user to re-enter anything else.
+
+Example re-invocation for the RestToMCP flow:
+
+```
+RestToMCPGenerator(spec=<same-file>, selectedOperations='{"\/weather":["get"],"\/pets":["post"]}')
 ```
 
 ## Notes

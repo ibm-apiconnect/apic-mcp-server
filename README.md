@@ -103,7 +103,39 @@ If you prefer manual setup or need to troubleshoot:
 1. **Choose the template file** [`mcp.bob.json`](./analytics/mcp.bob.json) from the specific service folder
 2. **Fill in your APIC configuration details** in the template
 3. **Copy the configured mcp json** to your workspace `.bob` folder
-4. **Follow the official Bob setup guide**:
+4. **Install Agent Skills** (Required)
+
+   Clone the repository to get access to bundled skills:
+
+   ```bash
+   # macOS/Linux
+   git clone --filter=blob:none --no-checkout https://github.com/ibm-apiconnect/apic-mcp-server.git ~/apic-mcp
+   git -C ~/apic-mcp sparse-checkout init --cone
+   git -C ~/apic-mcp sparse-checkout set README.md skills/
+   git -C ~/apic-mcp checkout main
+   ```
+
+   ```powershell
+   # Windows (PowerShell)
+   git clone --filter=blob:none --no-checkout https://github.com/ibm-apiconnect/apic-mcp-server.git "$env:USERPROFILE\apic-mcp"
+   git -C "$env:USERPROFILE\apic-mcp" sparse-checkout init --cone
+   git -C "$env:USERPROFILE\apic-mcp" sparse-checkout set README.md skills/
+   git -C "$env:USERPROFILE\apic-mcp" checkout main
+   ```
+
+   Then install available skills:
+
+   ```bash
+   # macOS/Linux
+   npx -y skills add -y ~/apic-mcp/skills/init-apic-ai-assets -a bob
+   ```
+
+   ```powershell
+   # Windows (PowerShell)
+   npx -y skills add -y "$env:USERPROFILE\apic-mcp\skills\init-apic-ai-assets" -a bob
+   ```
+
+5. **Follow the official Bob setup guide**:
    - Open [`IBM BOB MCP server setup`](https://www.ibm.com/think/tutorials/mcp-integration-ibm-bob)
    - Follow the manual configuration instructions
 
@@ -167,7 +199,39 @@ The skill will automatically:
 1. **Choose the template file** [`mcp.vscode.json`](./analytics/mcp.vscode.json) from the specific service folder
 2. **Fill in your APIC configuration details** in the template
 3. **Copy the configured mcp json** to your workspace `.vscode` folder
-4. **Follow the official VS Code setup guide**:
+4. **Install Agent Skills** (Required)
+
+   Clone the repository to get access to bundled skills:
+
+   ```bash
+   # macOS/Linux
+   git clone --filter=blob:none --no-checkout https://github.com/ibm-apiconnect/apic-mcp-server.git ~/apic-mcp
+   git -C ~/apic-mcp sparse-checkout init --cone
+   git -C ~/apic-mcp sparse-checkout set README.md skills/
+   git -C ~/apic-mcp checkout main
+   ```
+
+   ```powershell
+   # Windows (PowerShell)
+   git clone --filter=blob:none --no-checkout https://github.com/ibm-apiconnect/apic-mcp-server.git "$env:USERPROFILE\apic-mcp"
+   git -C "$env:USERPROFILE\apic-mcp" sparse-checkout init --cone
+   git -C "$env:USERPROFILE\apic-mcp" sparse-checkout set README.md skills/
+   git -C "$env:USERPROFILE\apic-mcp" checkout main
+   ```
+
+   Then install available skills:
+
+   ```bash
+   # macOS/Linux
+   npx -y skills add -y ~/apic-mcp/skills/init-apic-ai-assets -a github-copilot
+   ```
+
+   ```powershell
+   # Windows (PowerShell)
+   npx -y skills add -y "$env:USERPROFILE\apic-mcp\skills\init-apic-ai-assets" -a github-copilot
+   ```
+
+5. **Follow the official VS Code setup guide**:
    - Open [`VS Code MCP server setup`](https://code.visualstudio.com/docs/copilot/customization/mcp-servers#_add-an-mcp-server)
    - Expand the section **`Add an MCP server to your workspace`** for detailed instructions
 
