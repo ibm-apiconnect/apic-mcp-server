@@ -29,7 +29,7 @@ This skill should already be installed if you used the `init-apic-mcp` command f
 /package-kind-files @mcp-server-kind.yaml
 ```
 
-### Table 1. IDIG Standalone Parameters
+### Table 1. IDIG Parameters
 
 | Parameter | Required | Description | Default |
 | -------- | ------- | -------- | ------- |

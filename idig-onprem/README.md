@@ -1,6 +1,6 @@
-# IDIG Standalone MCP Server
+# IBM Datapower Interact Gateway (IDIG) MCP Server
 
-The IDIG Standalone MCP Server is a comprehensive Model Context Protocol (MCP) server designed for seamless integration with MCP clients and AI assistants. This server provides powerful tools for managing and interacting with the IBM DataPower Interact Gateway (IDIG) platform.
+The IDIG MCP Server is a comprehensive Model Context Protocol (MCP) server designed for seamless integration with MCP clients and AI assistants. This server provides powerful tools for managing and interacting with the IBM DataPower Interact Gateway (IDIG) platform.
 
 ## Overview
 
@@ -33,7 +33,7 @@ This MCP server enables users to perform essential tasks for the IDIG platform, 
 
 The setup for this MCP server is documented in the [APIC MCP Server setup guide](https://github.com/ibm-apiconnect/apic-mcp-server/blob/main/README.md).
 
-When setting up with the `init-apic-mcp` command, specify `idig-standalone-mcp-server` when prompted for the MCP server type.
+When setting up with the `init-apic-mcp` command, specify `idig-onprem-mcp-server` when prompted for the MCP server type.
 
 ## Requirements
 

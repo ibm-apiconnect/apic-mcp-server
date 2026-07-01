@@ -4,7 +4,7 @@
 
 **Tool name**: GetAnalyticsAILLM
 
-**Description**: Provides insights into AI LLM usage and analytics within IDIG standalone. Track token consumption, measure AI model popularity, monitor consumer organizations and applications, and analyze performance metrics.
+**Description**: Provides insights into AI LLM usage and analytics within IDIG. Track token consumption, measure AI model popularity, monitor consumer organizations and applications, and analyze performance metrics.
 
 ## Supported Operations
 
