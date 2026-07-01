@@ -1,4 +1,6 @@
 .DS_Store
 .vscode/
 .bob/
+.agents/
 logs/*
+skills-lock.json

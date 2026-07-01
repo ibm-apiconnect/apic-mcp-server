@@ -28,8 +28,8 @@ Ask for the user choice.
 
 **Rules**:
 - Wait for the user's answer before proceeding.
-- If the user answers **1** (IBM API Connect), follow all steps in the `idig-apic` skill.
-- If the user answers **2** (IDIG standalone / on-prem), follow all steps in the `idig-onprem` skill.
+- If the user answers **1** (IBM API Connect), follow all steps in the `idig-apic.md` instructions.
+- If the user answers **2** (IDIG standalone / on-prem), follow all steps in the `idig-onprem.md` instructions.
 - If the user is unsure, briefly describe the difference:
   - IBM API Connect is the full API management platform — if they have an API manager URL and API keys they are an APIC user.
   - IDIG standalone is a self-contained DataPower Gateway deployment — if they only have a gateway base URL, username, and password, they are an on-prem IDIG user.

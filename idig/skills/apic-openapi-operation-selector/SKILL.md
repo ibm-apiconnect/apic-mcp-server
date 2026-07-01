@@ -11,6 +11,8 @@ Use this skill when you need to inspect an OpenAPI or Swagger file, derive every
 
 - Path to an OpenAPI file in JSON, YAML, or YML format
 
+**Before running any script**, verify the user has provided a valid file path. If the path has not been supplied, ask for it and do not proceed until it is given.
+
 ## Selection behavior
 
 - The skill must not rely on terminal-only interactive prompts as the primary selection UX
@@ -44,10 +46,11 @@ This prints JSON containing:
 
 **IMPORTANT**: The agent MUST:
 
-1. Show the numbered options to the user in a clear, readable format
+1. Show the numbered options to the user in a clear, readable format, using the `label` values **exactly as returned by the script** without reformatting them
 2. Ask the user which operations they want to select
 3. WAIT for the user to respond with their selection (e.g., "1,3,4" or "all" or "1")
 4. NEVER proceed to Step 2 without explicit user input
+5. If the script returns an empty `options` array, tell the user there are no selectable operations and stop
 
 Example options payload shape:
 
@@ -90,7 +93,7 @@ This prints JSON containing:
 - `selected`
 - `selectedOperations`
 
-The `selected` object is the final value to show as the user's chosen operations, formatted as a JSON object mapping paths to arrays of HTTP methods (in lowercase).
+The `selected` object is the **final output to present to the user** — show only this JSON object, not the full response. It maps paths to arrays of HTTP methods in lowercase.
 
 Example final output shape:
 
