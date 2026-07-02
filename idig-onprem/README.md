@@ -33,7 +33,8 @@ This MCP server enables users to perform essential tasks for the IDIG platform, 
 
 The setup for this MCP server is documented in the [APIC MCP Server setup guide](https://github.com/ibm-apiconnect/apic-mcp-server/blob/main/README.md).
 
-When setting up with the `init-apic-mcp` command, specify `idig-onprem-mcp-server` when prompted for the MCP server type.
+When setting up with the `init-apic-ai-assets` command, specify `idig-onprem-mcp-server` when prompted for the MCP server type.  
+The `init-apic-ai-assets` command will also set up a set of complementary agent skills from the following repo https://github.com/ibm-apiconnect/api-studio-skills to assist you in executing IDIG scenarios.  
 
 ## Requirements
 
