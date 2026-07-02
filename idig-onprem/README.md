@@ -49,6 +49,8 @@ This MCP server enables users to perform essential tasks for the IDIG platform, 
 /init-apic-ai-assets
 ```
 
+**Note:** As well as the MCP tools mentioned above the `init-apic-ai-assets` command will also set up a set of complementary agent skills from the following repo https://github.com/ibm-apiconnect/api-studio-skills to assist you in executing IDIG scenarios.  
+
 ## Requirements
 
 - Node.js (version specified in package.json)
