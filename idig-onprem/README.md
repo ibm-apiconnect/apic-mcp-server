@@ -37,11 +37,11 @@ This MCP server enables users to perform essential tasks for the IDIG platform, 
 
 - **VSCode (GitHub Copilot)**
   ```shell
-  npx -y skills add https://github.com/ibm-apiconnect/apic-mcp-server/skills -a github-copilot
+  npx -y skills add -y add https://github.com/ibm-apiconnect/apic-mcp-server/skills -a github-copilot
   ```
 - **IBM Bob**
   ```shell
-  npx -y skills add https://github.com/ibm-apiconnect/apic-mcp-server/skills -a bob
+  npx -y skills add -y add https://github.com/ibm-apiconnect/apic-mcp-server/skills -a bob
   ```
 
 **Step 2:** Invoke the skill in the Agent chat and follow the instructions.
