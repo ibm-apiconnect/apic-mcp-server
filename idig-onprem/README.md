@@ -29,11 +29,25 @@ This MCP server enables users to perform essential tasks for the IDIG platform, 
 - **[GetAnalyticsAILLM](./docs/ai_analytics.md#analytics-ai-llm)** - Track AI/LLM usage, token consumption, model popularity, and performance metrics
 - **[GetAnalyticsMCP](./docs/ai_analytics.md#analytics-mcp)** - Track MCP usage, call volumes, tool popularity, and consumer organization metrics
 
-## Setup
+## Quick Start
 
-The setup for this MCP server is documented in the [APIC MCP Server setup guide](https://github.com/ibm-apiconnect/apic-mcp-server/blob/main/README.md).
+> **Prerequisites:** Node.js and `npx` must be available on your system. For full setup details, see the [APIC MCP Server setup guide](https://github.com/ibm-apiconnect/apic-mcp-server/blob/main/README.md).
 
-When setting up with the `init-apic-mcp` command, specify `idig-onprem-mcp-server` when prompted for the MCP server type.
+**Step 1:** Install the `init-apic-ai-assets` skill
+
+- **VSCode (GitHub Copilot)**
+  ```shell
+  npx -y skills add -y https://github.com/ibm-apiconnect/apic-mcp-server/skills -a github-copilot
+  ```
+- **IBM Bob**
+  ```shell
+  npx -y skills add -y https://github.com/ibm-apiconnect/apic-mcp-server/skills -a bob
+  ```
+
+**Step 2:** Invoke the skill in the Agent chat and follow the instructions.
+```text
+/init-apic-ai-assets
+```
 
 ## Requirements
 
@@ -47,4 +61,4 @@ For detailed information about each tool, including parameters, examples, and us
 
 ## Support
 
-For issues, questions, or contributions, please refer to the main [APIC MCP Server repository](https://github.com/ibm-apiconnect/apic-mcp-server).
+For issues, questions, or contributions, please refer to the [APIC MCP Server repository](https://github.com/ibm-apiconnect/apic-mcp-server).
