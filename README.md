@@ -18,15 +18,50 @@ This MCP server can be integrated with various MCP clients such as **Claude Desk
 
 ### ✅ Prerequisites
 
-- Existing API Connect v10 or v12 customer either on SaaS or on-prem
-  - Your _`provider organization`_ name
-  - _`API key`_ to connect with you API Connect instance
-  - _`Client ID`_ configured on your API Connect instance
-  - _`Client Secret`_ configured on your API Connect instance
-  - _`APIC Platform Endpoint`_ of your instance
-  - _`APIC Management Endpoint`_ of your instance
+> **Don't have an API Connect instance yet?** Jump to the [👇 No-instance setup](#-no-existing-instance-ibm-trial-environment) section below to get started with a free IBM trial environment.
+
+#### Option A — Existing API Connect instance (SaaS or on-prem)
+
+If you already have an API Connect v10 or v12 instance, you will need:
+
+- Your _`provider organization`_ name
+- _`API key`_ to connect with your API Connect instance
+- _`Client ID`_ configured on your API Connect instance
+- _`Client Secret`_ configured on your API Connect instance
+- _`APIC Platform Endpoint`_ of your instance
+- _`APIC Management Endpoint`_ of your instance
 - _`npm package`_ tar file **`OR`** the _`.mcpb`_ installer of the API Connect service (e.g., [Analytics](./analytics))
-- One of the [`suggested MCP Client`](#-suggested-mcp-clients) application
+- One of the [`suggested MCP Client`](#-suggested-mcp-clients) applications
+
+#### Option B — No existing instance (IBM Trial Environment)
+
+If you do **not** have an API Connect instance, you can use the IBM trial environment at no cost:
+
+1. Log in to the API Connect trial UI at [https://api-manager.trial.apiconnect.automation.ibm.com/](https://api-manager.trial.apiconnect.automation.ibm.com/)
+2. Click your **profile icon** in the top-right corner and select **My API Keys**
+3. Create a new API Key — on the same page you will be shown your `API Key`, `client_id`, and `client_secret`
+
+   > ⚠️ **Copy and save all three values immediately** — the `client_secret` is only shown once.
+
+4. Store these values in your MCP client configuration file as environment variables:
+
+   - **IBM BOB** → `.bob/mcp.json`
+   - **VS Code** → `.vscode/mcp.json`
+
+   ```json
+   "env": {
+       "API_KEY": "<your-api-key>",
+       "client_id": "<your-client-id>",
+       "client_secret": "<your-client-secret>"
+   }
+   ```
+
+   The trial environment endpoints are:
+
+   ```json
+   "APIC_PLATFORM_URL": "https://platform-api.trial.apiconnect.automation.ibm.com",
+   "APIC_MANAGEMENT_URL": "https://api-manager.trial.apiconnect.automation.ibm.com"
+   ```
 
 ---
 
