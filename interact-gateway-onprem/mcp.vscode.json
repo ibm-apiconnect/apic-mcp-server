@@ -34,13 +34,13 @@
         }
     ],
     "servers": {
-        "idig-onprem-mcp-server": {
+        "interact-gateway-onprem-mcp-server": {
             "command": "npx",
             "args": [
                 "-y",
                 "-p",
                 "${input:tarPath}",
-                "idig-onprem-mcp-server"
+                "interact-gateway-onprem-mcp-server"
             ],
             "env": {
                 "STANDALONE_USERNAME": "${input:username}",
