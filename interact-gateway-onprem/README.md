@@ -11,6 +11,7 @@ This MCP server enables users to perform essential tasks for the IDIG platform, 
 - Publishing assets to the IDIG platform
 - Analyzing AI/LLM usage and analytics
 - Converting between MCP server formats
+- Managing catalogs, gateways, consumer organizations, applications, and subscriptions
 
 ## Available Tools
 
@@ -23,6 +24,15 @@ This MCP server enables users to perform essential tasks for the IDIG platform, 
 - **[MCP Tools Enhancer](./docs/mcp_tools_enhancer.md#mcp-tools-enhancer)** - Enhance MCP tool names, descriptions, and parameter definitions for better AI agent understanding
 - **[MCPToolsList](./docs/mcp_to_mcp.md#mcptoolslist)** - Retrieve the list of tools available in an MCP Server
 - **[MCPToMCPGenerator](./docs/mcp_to_mcp.md#mcptomcpgenerator)** - Convert an MCP Server into MCP Kind file specifications for IDIG
+
+### Catalog & Subscription Management
+- **[ListCatalogs](./docs/catalog_management.md#listcatalogs)** - List all catalogs in the API Connect provider organization
+- **[ListGatewaysInCatalog](./docs/catalog_management.md#listgatewaysincatalog)** - List gateways configured in a catalog or space
+- **[ListConsumerOrgs](./docs/catalog_management.md#listconsumerorgs)** - List consumer organizations in a catalog
+- **[CreateConsumerApp](./docs/catalog_management.md#createconsumerapp)** - Create a new consumer application in a catalog
+- **[ListSubscriptionsInConsumerApp](./docs/catalog_management.md#listsubscriptionsinconsumerapp)** - List subscriptions within a consumer application
+- **[ListSubscriptionsInACatalog](./docs/catalog_management.md#listsubscriptionsinacatalog)** - List all subscriptions in a catalog with optional filters
+- **[CreateSubscriptionForPublishedAsset](./docs/catalog_management.md#createsubscriptionforpublishedasset)** - Create a subscription for a published MCP server or LLM provider asset
 
 ### Publishing & Analytics
 - **[Project Publish Tool](./docs/publish_assets.md#project-publish-tool)** - Publish project assets (zip files) to the IDIG platform
