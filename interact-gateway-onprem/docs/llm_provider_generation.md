@@ -24,7 +24,7 @@ What LLM Platforms can I connect to?
 Are there LLM Platform Providers that I can use?
 ```
 
-For more information please see the [Registering LLM Providers for governed access with IBM DataPower Interact Gateway](https://ibmdocs-test.dcs.ibm.com/docs/en/v12saas_internal_test?topic=gateway-registering-llm-providers-governed-access)
+For more information please see the [Registering LLM Providers for governed access with IBM DataPower Interact Gateway](https://www.ibm.com/docs/en/api-connect/cloud/12.1.1_saas?topic=gateway-registering-llm-providers)
 
 ## LLMProviderGenerator
 This tool can be used to generate connections to various LLM Providers with the IBM DataPower Interact Gateway. This enables organizations to register and manage access to LLM providers through a centralized and governed interface.
@@ -88,4 +88,4 @@ Set up a custom OpenAI-compatible provider for project dev with providerUrl http
 Set up a production-ready watsonx connection wx-prod-conn for project prod in region us-south with projectId 123-356-789, tag production, caching on with 600s TTL, rate limit 10000 tokens and 200 requests per minute, error handling enabled returning 429 with message "Rate limit exceeded on watsonx provider", default telemetry and api key secret watsonx-api-key
 ```
 
-For more information please see the [Registering LLM Providers for governed access with IBM DataPower Interact Gateway](https://ibmdocs-test.dcs.ibm.com/docs/en/v12saas_internal_test?topic=gateway-registering-llm-providers-governed-access)
+For more information please see the [Registering LLM Providers for governed access with IBM DataPower Interact Gateway](https://www.ibm.com/docs/en/api-connect/cloud/12.1.1_saas?topic=gateway-registering-llm-providers)

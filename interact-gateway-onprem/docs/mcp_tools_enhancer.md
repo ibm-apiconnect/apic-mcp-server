@@ -45,4 +45,4 @@ Enhance the MCP tools in /path/to/mcptool_file.yaml
 /mcp_tools_enhancer mcpSpec: @mcptool_file
 ```
 
-For more information please see the [Working with MCP tools and server with IBM DataPower Interact Gateway](https://ibmdocs-test.dcs.ibm.com/docs/en/v12saas_internal_test?topic=gateway-working-mcp-tools-server)
+For more information please see the [Working with MCP tools and server with IBM DataPower Interact Gateway](https://www.ibm.com/docs/en/api-connect/cloud/12.1.1_saas?topic=gateway-creating-mcp-tools)
