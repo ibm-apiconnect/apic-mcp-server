@@ -225,38 +225,7 @@ if (-not (Test-Path ".bob\mcp.json")) {
 }
 ```
 
-### Step 6: Install API Studio CLI and Agent Skills
-
-#### API Studio CLI (`idig-mcp-server` only)
-
-If `idig-mcp-server` is among the selected servers, run:
-
-```bash
-# All platforms
-npm i -g @apistudio/apim-cli@latest
-```
-
-NOTE: The `bin` command to invoke the APIM CLI package is `apic`
-
-Also install the API Studio build-project skill for Bob:
-
-```bash
-# For bobide
-npx -y skills add -y https://github.com/ibm-apiconnect/api-studio-skills/tree/develop --skill api-studio-build-project --skill api-studio-project-manager -a bob
-```
-
-For GitHub Co-pilot:
-
-```bash
-# For GitHub co-pilot
-npx -y skills add -y https://github.com/ibm-apiconnect/api-studio-skills/tree/develop --skill api-studio-build-project --skill api-studio-project-manager -a github-copilot
-```
-
-If either command fails:
-- Retry once.
-- If still failing, continue with MCP configuration and include the failure and manual retry commands in the final report.
-
-#### Bundled Agent Skills
+### Step 6: Install Bundled Agent Skills
 
 For each selected server, check whether its service folder contains a `skills/` subdirectory. If it does, install every skill found inside it.
 
@@ -271,17 +240,11 @@ Get-ChildItem "$env:USERPROFILE\apic-mcp\<service-folder>\skills\"
 For each skill folder found, run:
 
 ```bash
-# macOS/Linux (Bob)
-npx -y skills add -y ~/apic-mcp/<service-folder>/skills/<skill-folder> -a bob
+# macOS/Linux
+npx -y skills add -y ~/apic-mcp/<service-folder>/skills/<skill-folder> -a bob -a github-copilot
 
-# macOS/Linux (github copilot)
-npx -y skills add -y ~/apic-mcp/<service-folder>/skills/<skill-folder> -a github-copilot
-
-# Windows (PowerShell) (Bob)
-npx -y skills add -y "$env:USERPROFILE\apic-mcp\<service-folder>\skills\<skill-folder>" -a bob
-
-# Windows (PowerShell) (github copilot)
-npx -y skills add -y "$env:USERPROFILE\apic-mcp\<service-folder>\skills\<skill-folder>" -a github-copilot
+# Windows (PowerShell)
+npx -y skills add -y "$env:USERPROFILE\apic-mcp\<service-folder>\skills\<skill-folder>" -a bob -a github-copilot
 ```
 
 **Rules**:
@@ -492,7 +455,6 @@ Check that every selected server is correctly set up:
 1. ✓ `.tgz` file exists at the configured path
 2. ✓ No `<placeholder>` values remain in `.bob/mcp.json`
 3. ✓ `.bob/mcp.json` is valid JSON
-4. ✓ If `idig-mcp-server` was selected: `apic` CLI is available (`apic --version`)
 
 ### Step 13: Report Installation Status
 
@@ -512,12 +474,6 @@ Configured Servers (N of 8 available):
 Skipped (not selected):
   - <server-N>
   ...
-
-[If idig-mcp-server was selected:]
-Additional Dependencies:
-  ✓ @apistudio/apim-cli installed globally
-  ✓ api-studio-build-project skill added for bob and github-copilot agents
-  ✓ api-studio-project-manager skill added for bob and github-copilot agents
 
 [For each bundled skill installed from any selected server:]
   ✓ <skill-name> skill added for bob and github-copilot agents
@@ -556,27 +512,6 @@ Backup the corrupted file, attempt repair (trailing commas, quote fixes). If rep
 ### Missing `.tgz` File
 Run `git -C ~/apic-mcp sparse-checkout add <service-folder>/` followed by `git -C ~/apic-mcp pull origin main`. Verify the service folder name matches the table in Step 7.
 
-### API Studio CLI Installation Failure
-
-**Error**: `npm i -g @apistudio/apim-cli@latest` fails
-
-1. Check npm registry connectivity.
-2. Check global prefix is writable: `npm config get prefix`.
-3. Retry once. On continued failure, skip and include the manual command in the report:
-   ```bash
-   npm i -g @apistudio/apim-cli@latest
-   ```
-
-### API Studio Skill Installation Failure
-
-**Error**: `npx -y skills add ... --skill api-studio-build-project --skill api-studio-project-manager -a <agent (bob or github-copilot)>` fails
-
-1. Verify network access to `github.com`.
-2. Retry once. On continued failure, include the manual command in the report:
-   ```bash
-   npx -y skills add -y https://github.com/ibm-apiconnect/api-studio-skills/tree/develop --skill api-studio-build-project --skill api-studio-project-manager -a <agent (bob or github-copilot)>
-   ```
-
 ### Bundled Skill Installation Failure
 
 **Error**: `npx -y skills add -y ~/apic-mcp/<service-folder>/skills/<skill-folder> ...` fails
@@ -585,10 +520,10 @@ Run `git -C ~/apic-mcp sparse-checkout add <service-folder>/` followed by `git -
 2. Retry once. On continued failure, include the manual command in the final report:
    ```bash
    # macOS/Linux
-   npx -y skills add -y ~/apic-mcp/<service-folder>/skills/<skill-folder> -a <agent (bob or github-copilot)>
+   npx -y skills add -y ~/apic-mcp/<service-folder>/skills/<skill-folder> -a bob -a github-copilot
 
    # Windows (PowerShell)
-   npx -y skills add -y "$env:USERPROFILE\apic-mcp\<service-folder>\skills\<skill-folder>" -a <agent (bob or github-copilot)>
+   npx -y skills add -y "$env:USERPROFILE\apic-mcp\<service-folder>\skills\<skill-folder>" -a bob -a github-copilot
    ```
 
 ### Permission Denied
