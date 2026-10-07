@@ -21,7 +21,7 @@ This MCP server can be integrated with various MCP clients such as **Claude Desk
 | **API Connect v10.0.10+** | [`apic-v10-mcp-server`](./v10_build) — one server, all tools |
 | **API Connect v12** | Per-service packages: [Analytics](./analytics_build), [Management](./management_build), [Governance](./governance_build), and more |
 
-> **API Connect v10 users:** the v10 MCP server requires **v10.0.10 or above**, `API Agent` must be enabled, and the connecting user must have the `api-agent` role. There is a single MCP server build that covers all available tools — just install `apic-v10-mcp-server` and you're done.
+> **API Connect v10 users:** the v10 MCP server requires **v10.0.10 or above**, `API Agent` must be enabled _(refer to [this article](https://www.ibm.com/docs/en/api-connect/software/10.0.x_cd?topic=creating-deploying-publishing-apis-using-api-agent) for more info on `API Agent`)_, and the connecting user must have the `api-agent` role. There is a single MCP server build that covers all available tools — just install `apic-v10-mcp-server` and you're done.
 
 ---
 
@@ -32,7 +32,7 @@ This MCP server can be integrated with various MCP clients such as **Claude Desk
 > [!IMPORTANT]
 > **Minimum requirements for the v10 MCP server:**
 > - API Connect **v10.0.10 or above**
-> - **`API Agent`** must be enabled on your instance
+> - **`API Agent`** must be enabled on your instance _(refer to [this article](https://www.ibm.com/docs/en/api-connect/software/10.0.x_cd?topic=creating-deploying-publishing-apis-using-api-agent) for more info on `API Agent`)_
 > - The connecting user must have the **`api-agent`** role in the provider organization
 
 - An existing API Connect **v10.0.10+** instance (on-prem or SaaS)
